@@ -1,14 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import Header from './components/Header'
+import Body from './components/Body'
+import Footer from './components/Footer'
+
+import './styles/index.css'
+
+
+
 
 class App extends React.Component {
 
-    
+
     render() {
-        const eduardo = 'eduardo'
         return (
-        <div>Hello World{eduardo}</div>
+            <React.Fragment>
+                <Header />
+                <Body />
+                <Footer />
+            </React.Fragment>
         )
     }
 

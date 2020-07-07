@@ -9,7 +9,19 @@ module.exports = {
         rules: [
             { test: /\.svg$/, use: 'svg-inline-loader' },
             { test: /\.css$/, use: ['style-loader', 'css-loader'] },
-            { test: /\.(js)$/, use: 'babel-loader' }
+            { test: /\.(js)$/, use: 'babel-loader' },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader',
+                ],
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: [
+                    'file-loader',
+                ],
+            }
         ]
     },
     plugins: [
