@@ -8,8 +8,9 @@ class Header extends React.Component {
         return (
             
             <div className='header'>
+                <div className="header-titulo">condo</div>
                 <div className="container-botao">
-                    <input type="button" value="Entrar"></input>
+                    <input type="button" value="Entrar" className="button button--active"></input>
                 </div>
             </div>
             
