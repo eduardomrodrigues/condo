@@ -1,4 +1,5 @@
 import React from 'react'
+
 import Card from './Card'
 import VoteCard from './VoteCard'
 import PartyCard from './PartyCard'
@@ -6,14 +7,13 @@ import GymCard from './GymCard'
 import BarbecueCard from './BarbecueCard'
 
 
-
 class Body extends React.Component {
-    
-    constructor(props){
+
+    constructor(props) {
         super(props)
     }
-    
-    
+
+
     render() {
         return (
 
@@ -28,7 +28,7 @@ class Body extends React.Component {
                         <PartyCard />
                     </React.Fragment>
                 </Card>
-                
+
                 <Card titulo="Reserva academia" imagem="app/images/gym.png">
                     <React.Fragment>
                         <GymCard />
@@ -40,7 +40,6 @@ class Body extends React.Component {
                         <BarbecueCard />
                     </React.Fragment>
                 </Card>
-
 
 
             </div>

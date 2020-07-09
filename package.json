@@ -43,7 +43,9 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "moment": "^2.27.0",
     "react": "^16.13.1",
+    "react-big-calendar-pt-br": "file:../react-big-calendar",
     "react-dom": "^16.13.1"
   }
 }

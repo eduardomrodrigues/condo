@@ -141,25 +141,49 @@ body {
     cursor: pointer;
     font-size: 0.6em;
     border: 1px solid black;
-    padding: 5px;
+    padding-left: 10px;
+    padding: 4px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 4px;
 
     transition: background-color 0.2s ease;
 
 }
 
-
 .button--active {
 
     background-color: white;
+    border: 1px solid #98A3AE;
 
 }
 
 .button--active:hover {
 
-    background-color: #0069D9;
+    background-color: #3174AD;
     color: white;
+    border: 1px solid #3174AD;
 
 }
+
+
+.button--principal {
+
+    color: white;
+    background-color: #2ea44f;
+    border: 1px solid #2ea44f;
+    font-family: 'Raleway-Bold';
+    font-size: 1.3em;
+
+}
+
+.button--principal:hover {
+
+    background-color: #2C974B;
+    border: 1px solid #2C974B;
+
+}
+
 
 .card {
 
@@ -168,7 +192,6 @@ body {
     border: 1px solid #CCCCCC;
     margin: 10px;
 
-    box-shadow: 2px 1px #CCCCCC;
     background-color: white;
 
 
@@ -238,7 +261,7 @@ body {
 
 
 
-.card-container--ativo_aberto{
+.card-container--ativo_aberto {
 
     grid-row-start: 2;
     grid-row-end: 12;
@@ -246,7 +269,7 @@ body {
 }
 
 
-.card-close--ativo_aberto{
+.card-close--ativo_aberto {
 
 
     grid-column-start: 12;
@@ -262,7 +285,7 @@ body {
 
 }
 
-.card-titulo--ativo_aberto{
+.card-titulo--ativo_aberto {
 
     grid-column-start: 1;
     grid-column-end: 4;
@@ -281,7 +304,7 @@ body {
 .card--opened {
 
 
-   
+
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(12, 1fr);
@@ -291,6 +314,82 @@ body {
 
     position: absolute;
     z-index: 1;
+
+
+}
+
+.card-content {
+
+    display: grid;
+
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+
+    grid-column-start: 1;
+    grid-column-end: 13;
+
+    grid-row-start: 2;
+    grid-row-end: 13;
+
+    padding: 5px;
+
+
+}
+
+
+
+.col-1-5 {
+
+    grid-column-start: 1;
+    grid-column-end: 5;
+
+
+}
+
+.row-1-1 {
+
+    grid-row-start: 1;
+    grid-row-end: 1;
+
+
+}
+
+.col-2-13 {
+
+    grid-column-start: 2;
+    grid-column-end: 13;
+}
+
+.col-1-13 {
+
+    grid-column-start: 1;
+    grid-column-end: 13;
+}
+
+
+.row-2-13 {
+
+    grid-row-start: 2;
+    grid-row-end: 13;
+
+
+}
+
+.row-3-13 {
+    grid-row-start: 3;
+    grid-row-end: 13;
+
+
+}
+
+.col-1-4 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.col-11-13 {
+    grid-column-start: 11;
+    grid-column-end: 13;
 
 
 }
