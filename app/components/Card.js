@@ -55,7 +55,7 @@ class Card extends React.Component {
                                 <div className="card-titulo--ativo_aberto">
                                     {this.props.titulo}
                                 </div>
-                                <div className="card-close--ativo_aberto" onClick={(event) => this.handleCloseCardOnClick(event)}></div>
+                                <div className="card-close--ativo_aberto button-close" onClick={(event) => this.handleCloseCardOnClick(event)}></div>
                             </div>
                             <div className="card-content">
                                 {this.props.children}
