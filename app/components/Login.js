@@ -3,6 +3,13 @@ import Form from './Form'
 import Input from './Input'
 import Button from './Button'
 
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+
 class Login extends React.Component {
 
     constructor(props) {
@@ -111,6 +118,9 @@ class Login extends React.Component {
                         columnstart="1"
                         columnend="13" />
 
+                    <Router>
+                        <Link to='/user'>Items</Link>
+                    </Router>
                     <a
                         href="#"
                         style={{ gridArea: '5 / 1 / 5 / 6' }}

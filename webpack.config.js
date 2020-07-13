@@ -36,10 +36,8 @@ module.exports = {
 
     },
     devServer: {
+        publicPath: '/',
         historyApiFallback: true,
-        host: 'localhost',
-        port: 8080,
-        open: true
     },
     mode: 'development'
 }
