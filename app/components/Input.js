@@ -6,21 +6,37 @@ class Input extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            errorMessage: ''
+            errorMessage: '',
+            success: false
         }
+
+        this.handlerOnFocus = this.handlerOnFocus.bind(this)
+        this.handleClickOutside = this.handleClickOutside.bind(this)
+
     }
 
 
-    handlerOnFocus(){
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+    
+    handleClickOutside(event) {
+        if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+            alert('You clicked outside of me!');
+        }
+    }
+
+    handlerOnFocus() {
         this.setState({
-            errorMessage: ''
+            errorMessage: '',
+            success: false
         })
 
     }
 
 
 
-    addErrorMessage(message){
+    addErrorMessage(message) {
 
         this.setState({
             errorMessage: message
@@ -28,27 +44,35 @@ class Input extends React.Component {
     }
 
 
+    addSuccess() {
+
+        this.setState({
+            success: true
+        })
+    }
+
 
     render() {
 
         return (
             <>
-                <dt className="input-label">
+                <div style={{
+                    gridColumn: `${this.props.columnstart} / ${this.props.columnend}`,
+                    gridRow: `${this.props.rowstart} / ${this.props.rowend}`
+                }}>
                     <label htmlFor={`${this.props.id}`}>{this.props.label}</label>
-                </dt>
-                <dd>
                     <input {...this.props}
                         onFocus={() => this.handlerOnFocus()}
                         ref={this.props.id}
-                        className="input-text"
+                        className={`input-text ${this.state.success ? "input-text--success" : null}`}
                         type={`${this.props.type}`} id={`${this.props.id}`}></input>
-                </dd>
 
-                {this.state.errorMessage ?
-                    <dd className="input-invalid-message" >
-                        {this.state.errorMessage}
-                </dd>
-                    : null}
+                    {this.state.errorMessage ?
+                        <div className="input-invalid-message" >
+                            {this.state.errorMessage}
+                        </div>
+                        : null}
+                </div>
             </>
         )
 

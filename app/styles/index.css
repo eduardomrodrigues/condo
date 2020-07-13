@@ -54,6 +54,19 @@
     src: url('../fonts/Raleway/Raleway-Bold.ttf');
 }
 
+a:visited,
+a:active,
+a:link {
+
+    color: #4581B5;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
 .input-invalid-message {
     position: absolute;
     margin-top: 10px;
@@ -98,13 +111,16 @@
 .input-text {
     width: 99%;
     border: 1px solid #ced4da;
-    height: 25px;
+    height: 30px;
     border-radius: 4px;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    font-size: 1.2em;
 }
 
 .input-text--success {
     background-image: url('../images/success.png');
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 
@@ -124,12 +140,6 @@ body {
     font-family: 'Raleway';
 }
 
-
-.input-label {
-
-    margin-top: 15px;
-
-}
 
 .modal {
 
@@ -293,12 +303,13 @@ body {
     border: 1px solid black;
     padding-left: 10px;
     padding: 4px;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
     border-radius: 4px;
     border: 0;
-
     transition: background-color 0.2s ease;
+    padding-top: 5px;
+    padding-bottom: 5px;
 
 }
 
@@ -735,6 +746,16 @@ body {
 .row-1-5 {
     grid-row-start: 1;
     grid-row-end: 5;
+
+
+}
+
+.form-grid{
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+
 
 
 }

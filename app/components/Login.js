@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from './Form'
 import Input from './Input'
-
+import Button from './Button'
 
 class Login extends React.Component {
 
@@ -12,7 +12,7 @@ class Login extends React.Component {
             password: ''
         }
 
-        this.handleClick = this.handleClick.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
 
         this.inputEmail = React.createRef()
@@ -20,14 +20,37 @@ class Login extends React.Component {
 
     }
 
-    handleClick() {
+    handleSubmit() {
 
-        !this.state.email && this.inputEmail.current.addErrorMessage('O campo e-mail obrigatório')
-        !this.state.password && this.inputPassword.current.addErrorMessage('O campo senha obrigatório')
+        let isValid = true;
 
+        if (!this.state.email) {
+            isValid = false
+            this.inputEmail.current.addErrorMessage('O campo e-mail obrigatório')
+        }
+
+
+        if (!this.state.password) {
+            isValid = false
+            this.inputPassword.current.addErrorMessage('O campo e-mail obrigatório')
+        }
+
+        if (!this.validateEmail(this.state.email)) {
+            this.inputEmail.current.addErrorMessage('Email inválido')
+            isValid = false
+        }
+
+
+        console.log(`submeter ${isValid}`)
 
     }
 
+    validateEmail(mail) {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+            return (true)
+        }
+        return (false)
+    }
 
     handleChange(event) {
         event.persist()
@@ -39,16 +62,27 @@ class Login extends React.Component {
         })
     }
 
+
+    handleClick(event) {
+        event.preventDefault()
+
+        window.location = '/user'
+
+    }
+
     render() {
 
         return (
             <React.Fragment>
 
                 <Form
+                    handleSubmit={() => {
+                        this.handleSubmit()
+                    }}
                     columnStart="3"
                     columnEnd="11"
                     rowStart="1"
-                    rowEnd="5">
+                    rowEnd="12">
 
 
                     <Input
@@ -58,7 +92,11 @@ class Login extends React.Component {
                         name="email"
                         id="email-id"
                         onChange={e => this.handleChange(e)}
-                        value={this.state.email} />
+                        value={this.state.email}
+                        rowstart="2"
+                        rowend="2"
+                        columnstart="1"
+                        columnend="13" />
 
                     <Input
                         ref={this.inputPassword}
@@ -67,17 +105,24 @@ class Login extends React.Component {
                         type="password"
                         id="password-id"
                         onChange={e => this.handleChange(e)}
-                        value={this.state.password} />
+                        value={this.state.password}
+                        rowstart="3"
+                        rowend="3"
+                        columnstart="1"
+                        columnend="13" />
+
+                    <a
+                        href="#"
+                        style={{ gridArea: '5 / 1 / 5 / 6' }}
+                        onClick={this.handleClick}> Quero me cadastrar</a >
+                    <Button label="login"
+                        rowStart="5"
+                        rowEnd="5"
+                        columnStart="9"
+                        columnEnd="13" />
 
                 </Form>
-
-                <button
-                    type="button"
-                    onClick={() => this.handleClick()}
-                    className="button button--active col-9-11 row-5-5 btn btn-primary">Login</button>
-
-                <a className="col-3-6 row-5-5" href=""> Quero me cadastrar</a >
-            </React.Fragment>
+            </React.Fragment >
         )
 
     }
