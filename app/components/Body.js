@@ -22,10 +22,7 @@ class Body extends React.Component {
 
     render() {
         return (
-            <Router>
-                <Switch>
-                    <Route exact path="/">
-                        <div className="corpo">
+            <div className="corpo">
                             <Card titulo="Votação em andamento" imagem="app/images/vote.png" >
                                 <VoteCard />
                             </Card>
@@ -49,11 +46,7 @@ class Body extends React.Component {
                                 </React.Fragment>
                             </Card>
                         </div>
-                    </Route>
-                    <Route path="/user" component={() => <NewUser />}>
-                    </Route>
-                </Switch>
-            </Router>
+            
         )
     }
 }
