@@ -22,30 +22,31 @@ class Body extends React.Component {
 
     render() {
         return (
-            <>
-                <Route exact path="/">
-                    <div className="corpo">
-                        <Card titulo="Votação em andamento" imagem="app/images/vote.png" >
-                            <VoteCard />
-                        </Card>
+            <div className="corpo">
+                <Card titulo="Votação em andamento" imagem="app/images/vote.png" >
+                    <VoteCard />
+                </Card>
 
 
-                        <Card titulo="Reserva de salão de festas" imagem="app/images/party.png">
-                            <PartyCard />
-                        </Card>
+                <Card titulo="Reserva de salão de festas" imagem="app/images/party.png">
+                    <React.Fragment>
+                        <PartyCard />
+                    </React.Fragment>
+                </Card>
 
-                        <Card titulo="Reserva academia" imagem="app/images/gym.png">
-                            <GymCard />
-                        </Card>
+                <Card titulo="Reserva academia" imagem="app/images/gym.png">
+                    <React.Fragment>
+                        <GymCard />
+                    </React.Fragment>
+                </Card>
 
-                        <Card titulo="Reserva churrasqueira" imagem="app/images/barbecue.png">
-                            <BarbecueCard />
-                        </Card>
-                    </div>
-                </Route>
-                <Route path="/user" component={() => <NewUser />}>
-                </Route>
-            </>
+                <Card titulo="Reserva churrasqueira" imagem="app/images/barbecue.png">
+                    <React.Fragment>
+                        <BarbecueCard />
+                    </React.Fragment>
+                </Card>
+            </div>
+
         )
     }
 }

@@ -4,8 +4,6 @@ import Login from './Login'
 
 
 
-
-
 class Header extends React.Component {
 
     constructor(props) {
@@ -14,6 +12,7 @@ class Header extends React.Component {
             modalOpen: false
         }
         this.handleEntrarClick = this.handleEntrarClick.bind(this)
+        this.handleCloseModal = this.handleCloseModal.bind(this)
         this.modalLogin = React.createRef()
 
     }
@@ -28,6 +27,15 @@ class Header extends React.Component {
         this.modalLogin.current.openModal()
     }
 
+
+    handleCloseModal(){
+
+        this.setState({
+            modalOpen: false
+        })
+
+        this.modalLogin.current.handleCloseModal()
+    }
 
 
     render() {
@@ -51,10 +59,7 @@ class Header extends React.Component {
                     rows="5"
                     columns="4">
                 
-                    <Login />
-                
-                
-                
+                    <Login closeModal={() => this.handleCloseModal}/>
                 
                 </Modal>
             </React.Fragment>
