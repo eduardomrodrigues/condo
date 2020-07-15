@@ -43,9 +43,9 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@eduardomrodrigues/react-big-calendar-pt-br": "^0.23.0",
     "moment": "^2.27.0",
     "react": "^16.13.1",
-    "react-big-calendar-pt-br": "file:../react-big-calendar",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
     "react-router-dom": "^5.2.0"

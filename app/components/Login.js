@@ -15,8 +15,9 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
-    this.inputEmail = React.createRef();
-    this.inputPassword = React.createRef();
+    this.inputEmail = React.createRef()
+    this.inputPassword = React.createRef()
+
   }
 
   handleSubmit() {

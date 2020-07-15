@@ -1,6 +1,6 @@
 import React from 'react'
 import events from '../events'
-import { Calendar, momentLocalizer } from 'react-big-calendar-pt-br'
+import { Calendar, momentLocalizer } from '@eduardomrodrigues/react-big-calendar-pt-br'
 import moment from 'moment';
 
 import '../styles/react-big-calendar.css'
