@@ -132,10 +132,10 @@ class NewUser extends React.Component {
 
                     <Button
                         label="login"
-                        rowStart="8"
-                        rowEnd="8"
-                        columnStart="9"
-                        columnEnd="13"
+                        rowStart="7"
+                        rowEnd="7"
+                        columnStart="7"
+                        columnEnd="11"
                     />
 
 
