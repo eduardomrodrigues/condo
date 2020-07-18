@@ -1,7 +1,9 @@
 import React from 'react'
 
+let to = {}
 
 class Input extends React.Component {
+
 
     constructor(props) {
         super(props)
@@ -11,20 +13,9 @@ class Input extends React.Component {
         }
 
         this.handlerOnFocus = this.handlerOnFocus.bind(this)
-        this.handleClickOutside = this.handleClickOutside.bind(this)
 
     }
 
-
-    componentDidMount() {
-        document.addEventListener('mousedown', this.handleClickOutside);
-    }
-    
-    handleClickOutside(event) {
-        if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
-            alert('You clicked outside of me!');
-        }
-    }
 
     handlerOnFocus() {
         this.setState({
@@ -35,12 +26,26 @@ class Input extends React.Component {
     }
 
 
-
     addErrorMessage(message) {
 
         this.setState({
             errorMessage: message
         })
+
+
+        to = window.setTimeout(() => {
+
+            this.setState({ errorMessage: null })
+
+        }, 6000)
+
+    }
+
+
+    componentWillUnmount(){
+
+        clearTimeout(to);
+
     }
 
 
@@ -67,11 +72,9 @@ class Input extends React.Component {
                         className={`input-text ${this.state.success ? "input-text--success" : null}`}
                         type={`${this.props.type}`} id={`${this.props.id}`}></input>
 
-                    {this.state.errorMessage ?
-                        <div className="input-invalid-message" >
+                        <div  className={`input-invalid-message ${!this.state.errorMessage ? 'input-invalid-message--hide': 'input-invalid-message--show'}`} >
                             {this.state.errorMessage}
                         </div>
-                        : null}
                 </div>
             </>
         )

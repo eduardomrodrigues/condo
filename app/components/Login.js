@@ -30,7 +30,7 @@ class Login extends React.Component {
 
     if (!this.state.password) {
       isValid = false;
-      this.inputPassword.current.addErrorMessage("O campo e-mail obrigatório");
+      this.inputPassword.current.addErrorMessage("O campo senha obrigatório");
     }
 
     if (!this.validateEmail(this.state.email)) {

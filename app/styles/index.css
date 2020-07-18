@@ -1,3 +1,32 @@
+@keyframes show {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+    1% {
+        display: block;
+    }
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+@keyframes hide {
+    0% {
+        display: block;
+        opacity: 1;
+    }
+    99% {
+        display: block;
+    }
+    100% {
+        display: none;
+        opacity: 0;
+    }
+}
+
+
+
 @keyframes shake {
     0% {
         transform: translate(1px, 1px) rotate(0deg);
@@ -67,17 +96,36 @@ a:hover {
 }
 
 
+.input-invalid-message--show {
+    display: block;
+
+
+
+
+}
+
+.input-invalid-message--hide {
+    display: none;
+
+
+
+
+}
+
 .input-invalid-message {
     position: absolute;
     margin-top: 10px;
-    background-color: #FFEEF0;
-    width: 23%;
-    height: 28px;
+    background-color: #FFF4F3;
+    width: 20%;
     z-index: 5;
     padding-left: 5px;
     padding-top: 5px;
-    border-radius: 3px;
+    border-radius: 5px;
     border: 1px solid #FD9398;
+
+    animation: show 200ms linear;
+    animation-fill-mode: forwards;    
+
 
 }
 
@@ -103,7 +151,7 @@ a:hover {
     content: '';
     position: absolute;
     bottom: 100%;
-    left: 1.6%;
+    left: 1.68%;
 }
 
 
@@ -519,6 +567,12 @@ body {
 
 }
 
+.col-4-11{
+
+    grid-column-start: 4;
+    grid-column-end: 11;
+}
+
 .row-1-1 {
 
     grid-row-start: 1;
@@ -541,7 +595,11 @@ body {
     grid-row-start: 2;
     grid-row-end: 3;
 }
+.row-2-7 {
 
+    grid-row-start: 2;
+    grid-row-end: 7;
+}
 
 
 .col-2-13 {
@@ -572,6 +630,12 @@ body {
     grid-row-start: 3;
     grid-row-end: 4;
 }
+
+.row-3-7 {
+    grid-row-start: 3;
+    grid-row-end: 7;
+}
+
 
 .col-1-4 {
     grid-column-start: 1;
@@ -731,6 +795,12 @@ body {
     grid-column-end: 11;
 }
 
+
+.col-6-11 {
+    grid-column-start: 6;
+    grid-column-end: 11;
+}
+
 .col-9-11 {
     grid-column-start: 9;
     grid-column-end: 11;
@@ -755,7 +825,8 @@ body {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(8, 1fr);
-
+    z-index: 2;
+    background-color: white;
 
 
 }
@@ -764,8 +835,12 @@ body {
 
     grid-row-start: 1;
     grid-row-end: 1;
-    grid-column-start: 2;
-    grid-column-end: 4;
+    grid-column-start: 5;
+    grid-column-end: 9;
+
+    transition-property: opacity, left, top, height;
+    transition-duration: .3s, .5s, .3s, .5s;
+
 
 
 }
@@ -774,6 +849,9 @@ body {
 
     border-radius: 5px;
     grid-gap: 12px;
+    transition-property: opacity, left, top, height;
+    transition-duration: .3s, .5s, .3s, .5s;
+
 }
 
 .button-medium-selected {
@@ -808,25 +886,24 @@ body {
     margin-top: 10px;
     cursor: pointer;
     background-color: #F9F9F9;
-
 }
 
 .button-medium--active {
-    -webkit-box-shadow: 4px 4px 5px 0px rgba(219,219,219,1);
-    -moz-box-shadow: 4px 4px 5px 0px rgba(219,219,219,1);
-    box-shadow: 4px 4px 5px 0px rgba(219,219,219,1);
+    -webkit-box-shadow: 4px 4px 5px 0px rgba(219, 219, 219, 1);
+    -moz-box-shadow: 4px 4px 5px 0px rgba(219, 219, 219, 1);
+    box-shadow: 4px 4px 5px 0px rgba(219, 219, 219, 1);
 }
 
 .button-medium--active:active {
-    -webkit-box-shadow: inset 4px 4px 5px 0px rgba(219,219,219,1);
-    -moz-box-shadow: inset 4px 4px 5px 0px rgba(219,219,219,1);
-    box-shadow: inset 4px 4px 5px 0px rgba(219,219,219,1);
+    -webkit-box-shadow: inset 4px 4px 5px 0px rgba(219, 219, 219, 1);
+    -moz-box-shadow: inset 4px 4px 5px 0px rgba(219, 219, 219, 1);
+    box-shadow: inset 4px 4px 5px 0px rgba(219, 219, 219, 1);
 }
 
 .button-medium--pressed {
-    -webkit-box-shadow: inset 4px 4px 5px 0px rgba(219,219,219,1);
-    -moz-box-shadow: inset 4px 4px 5px 0px rgba(219,219,219,1);
-    box-shadow: inset 4px 4px 5px 0px rgba(219,219,219,1);
+    -webkit-box-shadow: inset 4px 4px 5px 0px rgba(219, 219, 219, 1);
+    -moz-box-shadow: inset 4px 4px 5px 0px rgba(219, 219, 219, 1);
+    box-shadow: inset 4px 4px 5px 0px rgba(219, 219, 219, 1);
 }
 
 
@@ -836,5 +913,20 @@ body {
     left: 0;
     margin-left: 25%;
 
+
+}
+
+.nome-logado-sucesso {
+    color: #218838;
+}
+
+.hiding{
+
+    opacity: 0;
+
+}
+.showing{
+
+    opacity: 1;
 
 }
