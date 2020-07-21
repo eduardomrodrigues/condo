@@ -19,6 +19,8 @@ class NewUser extends React.Component {
             nome: '',
             torre: 'torre1',
             apartamento: '',
+            senha: '',
+            confirmacaoSenha: '',
             success: false,
             messageSuccess: false
 
@@ -33,6 +35,8 @@ class NewUser extends React.Component {
         this.inputEmail = React.createRef()
         this.inputNome = React.createRef()
         this.inputApartamento = React.createRef()
+        this.inputSenha = React.createRef()
+        this.inputConfirmacaoSenha = React.createRef()
 
 
 
@@ -43,12 +47,14 @@ class NewUser extends React.Component {
 
         var current = this;
         axios.post(constants.API_URL + '/user', {
-            name: this.state.name,
+            name: this.state.nome,
             email: this.state.email,
             ap: this.state.apartamento,
-            torre: this.state.torre
-        }).then(function (response) {
-            current.handleSuccess();
+            torre: this.state.torre,
+            senha: this.state.senha
+        }).then(function (token) {
+
+            current.handleSuccess(token.data)
 
         }).catch(function (error) {
             if (error.response.status === 409) {
@@ -87,9 +93,26 @@ class NewUser extends React.Component {
             isValid = false;
         }
 
+        if (!this.state.senha) {
+            this.inputSenha.current.addErrorMessage("Informe uma senha");
+            isValid = false;
+        }
+
+        if (!this.state.confirmacaoSenha) {
+            this.inputConfirmacaoSenha.current.addErrorMessage("Confirme sua senha");
+            isValid = false;
+        }
+
+        if(this.state.senha !== this.state.confirmacaoSenha){
+            this.inputSenha.current.addErrorMessage("As senhas não conferem");
+            this.setState({
+                confirmacaoSenha: ''
+            })
+            isValid = false;
+        }
 
         if (!this.validateEmail(this.state.email)) {
-            this.inputEmail.current.addErrorMessage("Email inválido");
+            this.inputEmail.current.addErrorMessage("Email inválido")
             isValid = false;
         }
 
@@ -102,27 +125,32 @@ class NewUser extends React.Component {
 
         const { name, value } = event.target;
 
+
         this.setState({
             [name]: value,
         });
     }
 
-    handleSuccess() {
+
+
+    handleSuccess({token}) {
+        
+
+        localStorage.setItem(constants.KEY_CONDO_STORAGE, token.split('.')[1])
+        
         this.setState({
             success: true
         })
 
-        timerSuccessMessage = setTimeout(() => {
 
+
+        timerSuccessMessage = setTimeout(() => {
             this.setState({
                 messageSuccess: true
-
             })
-
-
             redirect = setTimeout(() => {
                 window.location = '/'
-            }, 1500)
+            }, 2000)
 
         }, 500)
     }
@@ -184,15 +212,45 @@ class NewUser extends React.Component {
                                 />
 
                                 <Input
+                                    ref={this.inputSenha}
+                                    label="senha*"
+                                    type="password"
+                                    name="senha"
+                                    id="senha-id"
+                                    onChange={(e) => this.handleChange(e)}
+                                    value={this.state.senha}
+                                    rowstart="3"
+                                    rowend="3"
+                                    columnstart="3"
+                                    columnend="8"
+                                />
+
+
+                                <Input
+                                    ref={this.inputConfirmacaoSenha}
+                                    label="confimação de senha*"
+                                    type="password"
+                                    name="confirmacaoSenha"
+                                    id="confirmacaoSenha-id"
+                                    onChange={(e) => this.handleChange(e)}
+                                    value={this.state.confirmacaoSenha}
+                                    rowstart="4"
+                                    rowend="4"
+                                    columnstart="3"
+                                    columnend="8"
+                                />
+
+                                <Input
                                     ref={this.inputApartamento}
                                     label="apartamento*"
                                     type="number"
                                     name="apartamento"
                                     id="apartamento-id"
                                     onChange={(e) => this.handleChange(e)}
+
                                     value={this.state.apartamento}
-                                    rowstart="3"
-                                    rowend="3"
+                                    rowstart="5"
+                                    rowend="5"
                                     columnstart="3"
                                     columnend="5"
                                 />
@@ -201,8 +259,8 @@ class NewUser extends React.Component {
 
 
                                 <TowerButtons
-                                    rowstart="3"
-                                    rowend="5"
+                                    rowstart="5"
+                                    rowend="7"
                                     columnstart="5"
                                     columnend="9"
                                     value={this.state.torre}
@@ -216,8 +274,8 @@ class NewUser extends React.Component {
 
                                 <Button
                                     label="login"
-                                    rowStart="6"
-                                    rowEnd="6"
+                                    rowStart="8"
+                                    rowEnd="8"
                                     columnStart="3"
                                     columnEnd="5"
                                 />
@@ -228,8 +286,8 @@ class NewUser extends React.Component {
                         <>
                             <h1 style={{ opacity: this.state.messageSuccess ? 1 : 0 }} className='form-titulo'>Bem vindo, <span className="nome-logado-sucesso">{this.state.nome}</span></h1>
                             <div style={{ opacity: this.state.messageSuccess ? 1 : 0 }} className="col-6-11 row-3-7">
-                                    <h2>Preparando sua home...</h2>
-                                    <img src='app/images/progress.gif' />
+                                <h2>Preparando sua home...</h2>
+                                <img src='app/images/progress.gif' />
                             </div>
                         </>
                     }
