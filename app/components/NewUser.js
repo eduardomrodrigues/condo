@@ -149,7 +149,8 @@ class NewUser extends React.Component {
                 messageSuccess: true
             })
             redirect = setTimeout(() => {
-                window.location = '/'
+                this.props.onUserLogin()
+                window.location = '/dashboard'
             }, 2000)
 
         }, 500)

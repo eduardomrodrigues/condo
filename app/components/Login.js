@@ -3,6 +3,9 @@ import Form from "./Form";
 import Input from "./Input";
 import Button from "./Button";
 import { Link } from "react-router-dom";
+import axios from 'axios'
+import constants from '../const'
+
 
 class Login extends React.Component {
   constructor(props) {
@@ -10,6 +13,7 @@ class Login extends React.Component {
     this.state = {
       email: "",
       password: "",
+      messageError: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,6 +23,9 @@ class Login extends React.Component {
     this.inputPassword = React.createRef()
 
   }
+
+
+
 
   handleSubmit() {
     let isValid = true;
@@ -38,7 +45,31 @@ class Login extends React.Component {
       isValid = false;
     }
 
-    console.log(`submeter ${isValid}`);
+    if (isValid) {
+
+      axios.post(constants.API_URL + '/login', {
+        name: this.state.nome,
+        email: this.state.email
+      }).then((result) => {
+
+        localStorage.setItem(constants.KEY_CONDO_STORAGE, result.data.token.split('.')[1])
+        this.props.onUserLogin()
+
+        window.location = '/dashboard'
+
+      }).catch((error) => {
+
+        if (error.response.status === 404) {
+          this.setState({
+            messageError: 'Sua senha ou seu usário estão errados'
+          })
+
+        }
+      });
+
+    }
+
+
   }
 
   validateEmail(mail) {
@@ -55,6 +86,8 @@ class Login extends React.Component {
 
     this.setState({
       [name]: value,
+      messageError: ''
+
     });
   }
 
@@ -74,8 +107,15 @@ class Login extends React.Component {
           columnStart="3"
           columnEnd="11"
           rowStart="1"
-          rowEnd="12"
-        >
+          rowEnd="12">
+
+
+          {this.state.messageError ?
+            <div className="box-invalid-message" style={{ gridArea: "2 / 1 / 2 / 12" }}>
+              {this.state.messageError}
+            </div>
+            : null}
+
           <Input
             ref={this.inputEmail}
             label="e-mail"
@@ -84,8 +124,8 @@ class Login extends React.Component {
             id="email-id"
             onChange={(e) => this.handleChange(e)}
             value={this.state.email}
-            rowstart="2"
-            rowend="2"
+            rowstart="3"
+            rowend="3"
             columnstart="1"
             columnend="13"
           />
@@ -98,21 +138,21 @@ class Login extends React.Component {
             id="password-id"
             onChange={(e) => this.handleChange(e)}
             value={this.state.password}
-            rowstart="3"
-            rowend="3"
+            rowstart="4"
+            rowend="4"
             columnstart="1"
             columnend="13"
           />
 
-          <Link 
+          <Link
             onClick={this.props.closeModal()}
-            style={{ gridArea: "5 / 1 / 5 / 6" }} to="/user">
+            style={{ gridArea: "6 / 1 / 6 / 6" }} to="/user">
             Quero me cadastrar
           </Link>
           <Button
             label="login"
-            rowStart="5"
-            rowEnd="5"
+            rowStart="6"
+            rowEnd="6"
             columnStart="9"
             columnEnd="13"
           />

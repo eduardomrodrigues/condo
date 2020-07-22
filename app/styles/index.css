@@ -3,22 +3,27 @@
         display: none;
         opacity: 0;
     }
+
     1% {
         display: block;
     }
+
     100% {
         display: block;
         opacity: 1;
     }
 }
+
 @keyframes hide {
     0% {
         display: block;
         opacity: 1;
     }
+
     99% {
         display: block;
     }
+
     100% {
         display: none;
         opacity: 0;
@@ -112,6 +117,19 @@ a:hover {
 
 }
 
+.box-invalid-message {
+    background-color: #FFF4F3;
+    padding-left: 5px;
+    padding-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #FD9398;
+    animation: show 200ms linear;
+    animation-fill-mode: forwards;
+    padding: 10px;
+
+}
+
+
 .input-invalid-message {
     position: absolute;
     margin-top: 10px;
@@ -124,7 +142,8 @@ a:hover {
     border: 1px solid #FD9398;
 
     animation: show 200ms linear;
-    animation-fill-mode: forwards;    
+    animation-fill-mode: forwards;
+    height: 20px;
 
 
 }
@@ -151,7 +170,8 @@ a:hover {
     content: '';
     position: absolute;
     bottom: 100%;
-    left: 1.68%;
+    left: 1.76%;
+
 }
 
 
@@ -361,6 +381,20 @@ body {
 
 }
 
+.button--info {
+
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.button--info:hover {
+
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
 .button--active {
 
     background-color: rgba(49, 116, 173, 1);
@@ -567,7 +601,7 @@ body {
 
 }
 
-.col-4-11{
+.col-4-11 {
 
     grid-column-start: 4;
     grid-column-end: 11;
@@ -595,6 +629,7 @@ body {
     grid-row-start: 2;
     grid-row-end: 3;
 }
+
 .row-2-7 {
 
     grid-row-start: 2;
@@ -920,13 +955,126 @@ body {
     color: #218838;
 }
 
-.hiding{
+.hiding {
 
     opacity: 0;
 
 }
-.showing{
+
+.showing {
 
     opacity: 1;
 
 }
+
+.welcome-grid {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(12, 1fr);
+
+}
+
+.welcome-grid > h1 {
+    grid-column-start: 5;
+    grid-column-end: 9;
+
+    grid-row-start: 1;
+    grid-row-end: 1;
+
+}
+
+.welcome-grid > p {
+    grid-column-start: 4;
+    grid-column-end: 10;
+
+    grid-row-start: 2;
+    grid-row-end: 2;
+
+    font-size: 1.4em;
+
+    text-align: justify;
+    text-justify: inter-word;
+
+}
+
+.welcome-grid > footer {
+    grid-column-start: 1;
+    grid-column-end: 13;
+
+    grid-row-start: 5;
+    grid-row-end: 5;
+
+    background-color: black;
+
+
+}
+
+.welcome-grid > footer > div {
+
+    background-image: url('../images/skyline.png');
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+    height: 100px;
+    position: relative;
+    margin-top: -5%;
+}
+
+
+
+
+
+.sem-acesso-grid {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(12, 1fr);
+
+}
+
+.sem-acesso-grid > h1 {
+    grid-column-start: 3;
+    grid-column-end: 11;
+
+    grid-row-start: 1;
+    grid-row-end: 1;
+
+}
+
+.sem-acesso-grid > p {
+    grid-column-start: 4;
+    grid-column-end: 10;
+
+    grid-row-start: 2;
+    grid-row-end: 2;
+
+    font-size: 1.4em;
+
+    text-align: justify;
+    text-justify: inter-word;
+    min-height: 100px;
+
+}
+
+.sem-acesso-grid > footer {
+    grid-column-start: 1;
+    grid-column-end: 13;
+
+    grid-row-start: 6;
+    grid-row-end: 6;
+
+    background-color: black;
+
+
+}
+
+.sem-acesso-grid > footer > div {
+
+    background-image: url('../images/skyline.png');
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+    height: 100px;
+    position: relative;
+    margin-top: -5%;
+}
+
