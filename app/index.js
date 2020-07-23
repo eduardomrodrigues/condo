@@ -11,6 +11,9 @@ import {
 } from "react-router-dom";
 import "./styles/index.css";
 import NewUser from "./components/NewUser";
+import constants from './const'
+
+
 
 class App extends React.Component {
 
@@ -24,10 +27,23 @@ class App extends React.Component {
     }
 
 
+    isUsuarioLogado() {
+
+
+    }
+
     onUserLogin() {
         this.inputHeader
     }
 
+
+    recuperarNomeUsuario(){
+
+
+        let usuarioLogado = atob(localStorage.getItem(constants.KEY_CONDO_STORAGE).split('.')[1])
+
+        return JSON.parse(usuarioLogado).nome
+    }
 
 
     render() {
@@ -38,12 +54,29 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path="/">
                             <div className="welcome-grid">
-                                <h1>Bem vindo ao <span style={{ color: '#4581B5' }}>UpLife Residence</span></h1>
-                                <p>
-                                    Aqui você poderá alugar sua churrasqueira, reservar o salão de festas, participar dos acontecimentos do nosso condomínio.
-                                    Seja bem vindo! Se você já tem o cadastro, basta clicar em <span style={{ color: '#4581B5' }}>Entrar</span>. <br/>
-                                    Se você já tem seu cadastro informe com seu email e sua senha, caso contrário clique em <span style={{ color: '#4581B5' }}>quero me cadastrar</span>  
-                                </p>
+
+                                {localStorage.getItem(constants.KEY_CONDO_STORAGE) !== null ?
+
+
+                                    <>
+                                        <h1 style={{textAlign: 'center'}}>Bem vindo <span style={{ color: '#4581B5' }}>{this.recuperarNomeUsuario()}</span></h1>
+                                        <p style={{minHeight: '130px', textAlign: 'center'}}>
+                                           Clique no menu <a href="/dashboard" style={{ color: '#4581B5', textDecoration: 'underline' }}>Meu condomínio</a> para acessar começar!
+                                        </p>
+                                    </>
+                                    :
+                                    <>
+                                        <h1>Bem vindo ao <span style={{ color: '#4581B5' }}>UpLife Residence</span></h1>
+                                        <p>
+                                            Aqui você poderá alugar sua churrasqueira, reservar o salão de festas, participar dos acontecimentos do nosso condomínio.
+                                            Seja bem vindo! Se você já tem o cadastro, basta clicar em <span style={{ color: '#4581B5' }}>Entrar</span>. <br />
+                                            Se você já tem seu cadastro informe com seu email e sua senha, caso contrário
+                                            clique em <span style={{ color: '#4581B5' }}>quero me cadastrar</span>
+                                        </p>
+                                    </>
+                                }
+
+
                                 <footer>
                                     <div></div>
                                 </footer>

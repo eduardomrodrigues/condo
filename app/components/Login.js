@@ -52,7 +52,7 @@ class Login extends React.Component {
         email: this.state.email
       }).then((result) => {
 
-        localStorage.setItem(constants.KEY_CONDO_STORAGE, result.data.token.split('.')[1])
+        localStorage.setItem(constants.KEY_CONDO_STORAGE, result.data.token)
         this.props.onUserLogin()
 
         window.location = '/dashboard'
@@ -61,7 +61,7 @@ class Login extends React.Component {
 
         if (error.response.status === 404) {
           this.setState({
-            messageError: 'Sua senha ou seu usário estão errados'
+            messageError: 'Sua senha ou seu usuário estão errados'
           })
 
         }

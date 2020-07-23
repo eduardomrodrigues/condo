@@ -43,7 +43,7 @@ class Header extends React.Component {
 
 
 
-    
+
 
     handleCloseModal() {
 
@@ -72,6 +72,14 @@ class Header extends React.Component {
             <React.Fragment>
                 <div className='header'>
                     <div className="header-titulo">Up Life Residence</div>
+                    <nav className="header-menu">
+                        <ul>
+                            <li className="header-menu-item">
+                                <a href='/dashboard'>Meu condomínio</a>
+                            </li>
+                        </ul>
+                    </nav>
+
                     <div className="container-botao">
                         {!this.state.userLogged ?
                             <input type="button"

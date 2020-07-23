@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 import Card from './Card'
 import VoteCard from './VoteCard'
@@ -6,11 +7,43 @@ import PartyCard from './PartyCard'
 import GymCard from './GymCard'
 import BarbecueCard from './BarbecueCard'
 import CompleteUser from './CompleteUser'
+import constants from '../const'
 
 class Body extends React.Component {
 
     constructor(props) {
         super(props)
+    }
+
+
+    recuperarToken() {
+        return localStorage.getItem(constants.KEY_CONDO_STORAGE)
+    }
+
+    componentDidMount() {
+
+        let token = this.recuperarToken()
+
+
+        let usuarioLogado = atob(token.split('.')[1])
+        console.log(usuarioLogado)
+        
+        let _email = JSON.parse(usuarioLogado).email
+
+        axios.get(constants.API_URL + '/user/' + _email, {
+            headers: {
+                Authorization: token
+            }
+        }).then((usuario) => {
+            console.log(usuario)
+
+        }).catch((err) => {
+
+            (err.response != null && err.response.status === 401) && (window.location = '/')
+
+
+        })
+
     }
 
 

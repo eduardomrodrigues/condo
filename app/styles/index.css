@@ -293,7 +293,7 @@ body {
 
 
 .header {
-    display: grid;
+    display: inline-grid;
     grid-template-columns: repeat(12, 1fr);
 
     height: 7vh;
@@ -311,6 +311,7 @@ body {
     font-family: 'Raleway';
     font-size: 2.0em;
     margin-bottom: 5px;
+    width: 100%;
 
 
 }
@@ -321,8 +322,24 @@ body {
     grid-column-end: 5;
     margin: auto;
     font-size: 0.8em;
+    width: 100%;
 
 }
+
+
+.header>.header-menu {
+    grid-column-start: 5;
+    grid-column-end: 10;
+    margin: auto;
+    font-size: 0.6em;
+    width: 100%;
+
+
+}
+
+
+
+
 
 .container-botao {
 
@@ -384,8 +401,8 @@ body {
 .button--info {
 
     color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
+    background-color: #4E8EC3;
+    border-color: #4E8EC3;
 }
 
 .button--info:hover {
@@ -974,7 +991,7 @@ body {
 
 }
 
-.welcome-grid > h1 {
+.welcome-grid>h1 {
     grid-column-start: 5;
     grid-column-end: 9;
 
@@ -983,7 +1000,7 @@ body {
 
 }
 
-.welcome-grid > p {
+.welcome-grid>p {
     grid-column-start: 4;
     grid-column-end: 10;
 
@@ -997,7 +1014,7 @@ body {
 
 }
 
-.welcome-grid > footer {
+.welcome-grid>footer {
     grid-column-start: 1;
     grid-column-end: 13;
 
@@ -1009,7 +1026,7 @@ body {
 
 }
 
-.welcome-grid > footer > div {
+.welcome-grid>footer>div {
 
     background-image: url('../images/skyline.png');
     background-repeat: no-repeat;
@@ -1031,7 +1048,7 @@ body {
 
 }
 
-.sem-acesso-grid > h1 {
+.sem-acesso-grid>h1 {
     grid-column-start: 3;
     grid-column-end: 11;
 
@@ -1040,7 +1057,7 @@ body {
 
 }
 
-.sem-acesso-grid > p {
+.sem-acesso-grid>p {
     grid-column-start: 4;
     grid-column-end: 10;
 
@@ -1055,7 +1072,7 @@ body {
 
 }
 
-.sem-acesso-grid > footer {
+.sem-acesso-grid>footer {
     grid-column-start: 1;
     grid-column-end: 13;
 
@@ -1067,7 +1084,7 @@ body {
 
 }
 
-.sem-acesso-grid > footer > div {
+.sem-acesso-grid>footer>div {
 
     background-image: url('../images/skyline.png');
     background-repeat: no-repeat;
@@ -1078,3 +1095,37 @@ body {
     margin-top: -5%;
 }
 
+.header-menu-item {
+
+    display: inline-block;
+    position: relative;
+    padding-bottom: 3px;
+    margin-right: 10px;
+
+}
+
+.header-menu-item:last-child {
+    margin-right: 0;
+}
+
+.header-menu-item:after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 3px;
+    width: 0px;
+    background: transparent;
+    transition: width .5s ease, background-color .5s ease;
+}
+
+.header-menu-item:hover:after {
+    width: 100%;
+    background: #5B97C7;
+}
+
+.header-menu-item a, a:hover{
+
+    color: #000;
+    text-decoration: none;
+
+}
