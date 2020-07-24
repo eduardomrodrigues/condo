@@ -1,6 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const webpack = require('webpack')
+const Dotenv = require('dotenv-webpack');
 
 
 module.exports = {
@@ -27,13 +27,18 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'app/index.html'
-        })
+        }),
+        new Dotenv()
     ],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index_bundle.js'
 
 
+    },
+    devServer: {
+        publicPath: '/',
+        historyApiFallback: true,
     },
     mode: 'development'
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 
 
@@ -10,14 +11,8 @@ class Card extends React.Component {
         this.state = {
             isOpened: false
         }
-
-
-
         this.handleCardOnClick = this.handleCardOnClick.bind(this)
         this.handleCloseCardOnClick = this.handleCloseCardOnClick.bind(this)
-
-
-
     }
 
 
@@ -47,7 +42,7 @@ class Card extends React.Component {
     render() {
 
         return (
-            <div className={`card card--ativo ${this.state.isOpened ? 'card--opened' : 'card--closed'}`} onClick={this.handleCardOnClick}>
+            <div className={`card card--ativo ${this.state.isOpened ? 'card--opened' : 'card--closed'}`} onClick={(event) => this.handleCardOnClick(event)}>
                 {
                     (!this.state.isOpened) ?
                         <React.Fragment>
@@ -60,9 +55,11 @@ class Card extends React.Component {
                                 <div className="card-titulo--ativo_aberto">
                                     {this.props.titulo}
                                 </div>
-                                <div className="card-close--ativo_aberto" onClick={this.handleCloseCardOnClick}></div>
+                                <div className="card-close--ativo_aberto button-close" onClick={(event) => this.handleCloseCardOnClick(event)}></div>
                             </div>
-                            {this.props.children}
+                            <div className="card-content">
+                                {this.props.children}
+                            </div>
                         </React.Fragment>
 
 
@@ -75,6 +72,13 @@ class Card extends React.Component {
     }
 
 
+}
+
+
+Card.propTypes = {
+
+    titulo: PropTypes.string.isRequired,
+    imagem: PropTypes.string.isRequired
 }
 
 export default Card
