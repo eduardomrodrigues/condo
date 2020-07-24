@@ -13,6 +13,12 @@ import "./styles/index.css";
 import NewUser from "./components/NewUser";
 import constants from './const'
 
+function b64DecodeUnicode(str) {
+    // Going backwards: from bytestream, to percent-encoding, to original string.
+    return decodeURIComponent(atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+}
 
 
 class App extends React.Component {
@@ -40,7 +46,7 @@ class App extends React.Component {
     recuperarNomeUsuario(){
 
 
-        let usuarioLogado = atob(localStorage.getItem(constants.KEY_CONDO_STORAGE).split('.')[1])
+        let usuarioLogado = b64DecodeUnicode(localStorage.getItem(constants.KEY_CONDO_STORAGE).split('.')[1])
 
         return JSON.parse(usuarioLogado).nome
     }
@@ -59,7 +65,7 @@ class App extends React.Component {
 
 
                                     <>
-                                        <h1 style={{textAlign: 'center'}}>Bem vindo <span style={{ color: '#4581B5' }}>{this.recuperarNomeUsuario()}</span></h1>
+                                        <h1 style={{textAlign: 'center'}}>Bem vindo, <span style={{ color: '#4581B5' }}>{this.recuperarNomeUsuario()}</span></h1>
                                         <p style={{minHeight: '130px', textAlign: 'center'}}>
                                            Clique no menu <a href="/dashboard" style={{ color: '#4581B5', textDecoration: 'underline' }}>Meu condomínio</a> para acessar começar!
                                         </p>

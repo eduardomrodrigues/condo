@@ -136,7 +136,7 @@ class NewUser extends React.Component {
     handleSuccess({token}) {
         
 
-        localStorage.setItem(constants.KEY_CONDO_STORAGE, token.split('.')[1])
+        localStorage.setItem(constants.KEY_CONDO_STORAGE, token)
         
         this.setState({
             success: true
