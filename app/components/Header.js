@@ -1,6 +1,7 @@
 import React from 'react'
 import constants from '../const'
 import ModalContext from './ModalContext'
+import { Link } from 'react-router-dom'
 
 
 class Header extends React.Component {
@@ -53,7 +54,7 @@ class Header extends React.Component {
                     <nav className="header-menu">
                         <ul>
                             <li className="header-menu-item">
-                                <a href='/dashboard'>Meu condomínio</a>
+                                <Link to='/dashboard'>Meu condomínio</Link>
                             </li>
                         </ul>
                     </nav>

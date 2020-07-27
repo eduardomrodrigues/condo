@@ -17,8 +17,6 @@ class PrivateRouter extends React.Component {
     }
 
     componentDidMount() {
-
-
         isCertifiedValid().then((result) => {
             if (result.status === 200) {
                 // console.log(this.context)
