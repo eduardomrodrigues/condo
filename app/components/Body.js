@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 
 import Card from './Card'
 import VoteCard from './VoteCard'
@@ -7,53 +6,17 @@ import PartyCard from './PartyCard'
 import GymCard from './GymCard'
 import BarbecueCard from './BarbecueCard'
 import CompleteUser from './CompleteUser'
-import constants from '../const'
 
-function b64DecodeUnicode(str) {
-    // Going backwards: from bytestream, to percent-encoding, to original string.
-    return decodeURIComponent(atob(str).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-}
 
 
 
 class Body extends React.Component {
+    
+ 
 
     constructor(props) {
         super(props)
     }
-
-
-    recuperarToken() {
-        return localStorage.getItem(constants.KEY_CONDO_STORAGE)
-    }
-
-    componentDidMount() {
-
-        let token = this.recuperarToken()
-
-
-        let usuarioLogado = b64DecodeUnicode(token.split('.')[1])
-        
-        let _email = JSON.parse(usuarioLogado).email
-
-        axios.get(constants.API_URL + '/user/' + _email, {
-            headers: {
-                Authorization: token
-            }
-        }).then((usuario) => {
-            console.log(usuario)
-
-        }).catch((err) => {
-
-            (err.response != null && err.response.status === 401) && (window.location = '/')
-
-
-        })
-
-    }
-
 
     render() {
         return (
@@ -84,5 +47,7 @@ class Body extends React.Component {
         )
     }
 }
+
+    
 
 export default Body

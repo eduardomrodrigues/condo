@@ -13,7 +13,7 @@ class Modal extends React.Component {
 
 
         this.handleCloseModal = this.handleCloseModal.bind(this)
-
+        this.handleOpenModal = this.handleOpenModal.bind(this)
     }
 
     handleCloseModal() {
@@ -24,7 +24,7 @@ class Modal extends React.Component {
 
     }
 
-    openModal() {
+    handleOpenModal() {
         this.setState({
             modalOpen: true
         })

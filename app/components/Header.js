@@ -1,34 +1,21 @@
 import React from 'react'
-import Modal from './Modal'
-import Login from './Login'
 import constants from '../const'
-
+import ModalContext from './ModalContext'
 
 
 class Header extends React.Component {
 
+    static contextType = ModalContext
+
     constructor(props) {
-
         super(props)
+
         this.state = {
-            modalOpen: false,
-            userLogged: localStorage.getItem(constants.KEY_CONDO_STORAGE) !== null
+            userLogged: false
         }
+        
         this.handleEntrarClick = this.handleEntrarClick.bind(this)
-        this.handleCloseModal = this.handleCloseModal.bind(this)
         this.onUserLogin = this.onUserLogin.bind(this)
-        this.modalLogin = React.createRef()
-
-    }
-
-    handleEntrarClick() {
-
-        this.setState({
-            modalOpen: true
-        })
-
-
-        this.modalLogin.current.openModal()
     }
 
     handleSairClick() {
@@ -41,29 +28,20 @@ class Header extends React.Component {
 
     }
 
+    handleEntrarClick(){
 
+        this.context.abrirModalLogin()
 
-
-
-    handleCloseModal() {
-
-        this.setState({
-            modalOpen: false
-        })
-
-        this.modalLogin.current.handleCloseModal()
     }
 
     onUserLogin() {
 
         this.setState({
-            userLogged: true,
-            modalOpen: false
+            userLogged: true
         })
 
-        this.modalLogin.current.handleCloseModal()
+        console.log(this.state.userLogged)
     }
-
 
     render() {
 
@@ -95,15 +73,6 @@ class Header extends React.Component {
                     </div>
                 </div>
 
-                <Modal title="Entrar!"
-                    modalOpen={this.state.modalOpen}
-                    ref={this.modalLogin}
-                    rows="5"
-                    columns="4">
-
-                    <Login onUserLogin={() => this.onUserLogin()} closeModal={() => this.handleCloseModal} />
-
-                </Modal>
             </React.Fragment>
         )
 

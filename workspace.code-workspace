@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../condo-api"
 		}
 	],
 	"settings": {}

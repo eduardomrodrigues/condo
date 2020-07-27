@@ -13,7 +13,8 @@ class Login extends React.Component {
     this.state = {
       email: "",
       password: "",
-      messageError: ''
+      messageError: '',
+      location: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,11 +25,20 @@ class Login extends React.Component {
 
   }
 
+  setLocation(location){
+    this.setState({
+      location: location
+
+    })
+
+  }
+
 
 
 
   handleSubmit() {
     let isValid = true;
+    localStorage.removeItem(constants.KEY_CONDO_STORAGE)
 
     if (!this.state.email) {
       isValid = false;
@@ -46,18 +56,17 @@ class Login extends React.Component {
     }
 
     if (isValid) {
-
       axios.post(constants.API_URL + '/login', {
         name: this.state.nome,
-        email: this.state.email
+        senha: this.state.password
       }).then((result) => {
 
         localStorage.setItem(constants.KEY_CONDO_STORAGE, result.data.token)
+      }).then(() => {
+        window.location = this.state.location
         this.props.onUserLogin()
-
-        window.location = '/dashboard'
-
-      }).catch((error) => {
+      })
+      .catch((error) => {
 
         if (error.response.status === 404) {
           this.setState({
