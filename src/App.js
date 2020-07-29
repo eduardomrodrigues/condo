@@ -61,7 +61,7 @@ class App extends React.Component {
 
   }
 
-  onLoginSuccess(location) {
+  onLoginSuccess() {
 
     this.inputHeader.current.onUserLogin()
   }
@@ -77,7 +77,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <ModalProvider value={{ onLoginSuccess: (location = "/") => this.onLoginSuccess(location), onLoginUnsuccess: () => { this.onLoginUnsuccess() } }}>
+      <ModalProvider value={{ onLoginSuccess: () => this.onLoginSuccess(), onLoginUnsuccess: () => { this.onLoginUnsuccess() } }}>
         <React.Fragment>
           <Router>
 
