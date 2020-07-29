@@ -36,27 +36,34 @@ class App extends React.Component {
     this.modalUser = React.createRef()
     this.inputHeader = React.createRef()
 
-    this.handleCloseModal = this.handleCloseModal.bind(this)
     this.onUserLogin = this.onUserLogin.bind(this)
-    this.handleOpenModal = this.handleOpenModal.bind(this)
+    this.onLoginSuccess = this.onLoginSuccess.bind(this)
+    this.onLoginUnsuccess = this.onLoginUnsuccess.bind(this)
+    this.handleCloseModal = this.handleCloseModal.bind(this)
 
   }
   onUserLogin() {
 
+    this.inputHeader.current.onUserLogin()
+
+  }
+
+
+  handleCloseModal(){
+    this.modalLogin.current.handleCloseModal()
+    
+
+  }
+
+  onLoginUnsuccess() {
+    this.modalLogin.current.handleOpenModal()
+    this.inputHeader.current.onUserLogin()
+
+  }
+
+  onLoginSuccess(location) {
 
     this.inputHeader.current.onUserLogin()
-    this.handleCloseModal()
-
-  }
-
-  handleCloseModal() {
-    this.modalLogin.current.handleCloseModal()
-  }
-
-  handleOpenModal(location) {
-
-    this.modalLogin.current.handleOpenModal(location)
-    this.modalUser.current.setLocation(location)
   }
 
   recuperarNomeUsuario() {
@@ -70,7 +77,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <ModalProvider value={{ abrirModalLogin: (location = "/") => this.handleOpenModal(location), fecharModalLogin: () => { this.handleCloseModal() } }}>
+      <ModalProvider value={{ onLoginSuccess: (location = "/") => this.onLoginSuccess(location), onLoginUnsuccess: () => { this.onLoginUnsuccess() } }}>
         <React.Fragment>
           <Router>
 

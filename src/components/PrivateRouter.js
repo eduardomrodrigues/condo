@@ -20,7 +20,7 @@ class PrivateRouter extends React.Component {
         isCertifiedValid().then((result) => {
             if (result.status === 200) {
                 // console.log(this.context)
-                // this.context.fecharModalLogin()
+                this.context.onLoginSuccess()
                 this.setState({
                     isValid: true
                 })
@@ -28,11 +28,13 @@ class PrivateRouter extends React.Component {
                 this.setState({
                     isValid: false
                 })
+                this.context.onLoginUnsuccess()
             }
         }).catch((err) => {
             this.setState({
                 isValid: false
             })
+            this.context.onLoginUnsuccess()
         })
     }
 
@@ -44,7 +46,7 @@ class PrivateRouter extends React.Component {
                 {...rest}
                 render={props => (this.state.isValid === true)
                     ? (<Component {...props} />)
-                    : (<SemAcesso />)
+                    : (<SemAcesso isValid={this.state.isValid}/>)
 
                 }
 

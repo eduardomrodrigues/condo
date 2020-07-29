@@ -6,12 +6,6 @@ class SemAcesso extends React.Component{
     
     static contextType = ModalContext
 
-    componentDidMount(){
-        this.context.abrirModalLogin(window.location.pathname)
-
-
-    }
-
     render() {
         return (
             <div className="sem-acesso-grid">

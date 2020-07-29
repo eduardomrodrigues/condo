@@ -60,6 +60,8 @@ class NewUser extends React.Component {
             if (error.response.status === 409) {
                 current.inputEmail.current.addErrorMessage(error.response.data.message);
             }
+
+
         });
 
     }
@@ -149,7 +151,7 @@ class NewUser extends React.Component {
                 messageSuccess: true
             })
             redirect = setTimeout(() => {
-                this.props.onUserLogin()
+                // this.props.onUserLogin()
                 window.location = '/dashboard'
             }, 2000)
 
@@ -189,7 +191,6 @@ class NewUser extends React.Component {
                                     label="nome*"
                                     type="text"
                                     name="nome"
-                                    id="nome-id"
                                     onChange={(e) => this.handleChange(e)}
                                     value={this.state.nome}
                                     rowstart="1"
@@ -203,7 +204,6 @@ class NewUser extends React.Component {
                                     label="e-mail*"
                                     type="email"
                                     name="email"
-                                    id="email-id"
                                     onChange={(e) => this.handleChange(e)}
                                     value={this.state.email}
                                     rowstart="2"
@@ -217,7 +217,6 @@ class NewUser extends React.Component {
                                     label="senha*"
                                     type="password"
                                     name="senha"
-                                    id="senha-id"
                                     onChange={(e) => this.handleChange(e)}
                                     value={this.state.senha}
                                     rowstart="3"
@@ -232,7 +231,6 @@ class NewUser extends React.Component {
                                     label="confimação de senha*"
                                     type="password"
                                     name="confirmacaoSenha"
-                                    id="confirmacaoSenha-id"
                                     onChange={(e) => this.handleChange(e)}
                                     value={this.state.confirmacaoSenha}
                                     rowstart="4"
@@ -246,9 +244,7 @@ class NewUser extends React.Component {
                                     label="apartamento*"
                                     type="number"
                                     name="apartamento"
-                                    id="apartamento-id"
                                     onChange={(e) => this.handleChange(e)}
-
                                     value={this.state.apartamento}
                                     rowstart="5"
                                     rowend="5"
@@ -288,7 +284,7 @@ class NewUser extends React.Component {
                             <h1 style={{ opacity: this.state.messageSuccess ? 1 : 0 }} className='form-titulo'>Bem vindo, <span className="nome-logado-sucesso">{this.state.nome}</span></h1>
                             <div style={{ opacity: this.state.messageSuccess ? 1 : 0 }} className="col-6-11 row-3-7">
                                 <h2>Preparando sua home...</h2>
-                                <img alt="progresso" src='app/images/progress.gif' />
+                                <img alt="progresso" src='/images/progress.gif' />
                             </div>
                         </>
                     }

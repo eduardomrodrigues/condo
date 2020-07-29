@@ -17,24 +17,24 @@ class Body extends React.Component {
         return (
             <div className="corpo">
 
-                <Card titulo="Complete seu cadastro" imagem="app/images/complete.png" >
+                <Card titulo="Complete seu cadastro" imagem="/images/complete.png" >
                     <CompleteUser />
                 </Card>
 
-                <Card titulo="Votação em andamento" imagem="app/images/vote.png" >
+                <Card titulo="Votação em andamento" imagem="/images/vote.png" >
                     <VoteCard />
                 </Card>
 
 
-                <Card titulo="Reserva de salão de festas" imagem="app/images/party.png">
+                <Card titulo="Reserva de salão de festas" imagem="/images/party.png">
                     <PartyCard />
                 </Card>
 
-                <Card titulo="Reserva academia" imagem="app/images/gym.png">
+                <Card titulo="Reserva academia" imagem="/images/gym.png">
                     <GymCard />
                 </Card>
 
-                <Card titulo="Reserva churrasqueira" imagem="app/images/barbecue.png">
+                <Card titulo="Reserva churrasqueira" imagem="/images/barbecue.png">
                     <BarbecueCard />
                 </Card>
             </div>

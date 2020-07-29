@@ -100,12 +100,6 @@ class Login extends React.Component {
     });
   }
 
-  handleClick(event) {
-    event.preventDefault();
-
-    window.location = "/user";
-  }
-
   render() {
     return (
       <React.Fragment>
