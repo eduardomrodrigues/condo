@@ -1,37 +1,35 @@
 import React from 'react'
+
 import Form from "./Form";
-import Input from "./Input";
-
-export default function CompleteUser(){
 
 
-    const [nome, setNome] = React.useState('Eduardo')
+
+export default function CompleteUser({ user }) {
 
 
+    const [usuario] = React.useState({
+        nome: user.name,
+        email: user.email
+
+
+    })
 
 
     return (
         <div className="col-2-12">
-            <h2>Fale-me mais sobre o que acontece no seu apartamento</h2>
-            
-            <Form 
+            <h2>Fale-me mais sobre o que acontece no seu apartamento, <span style={{ color: '#4581B5' }}> {usuario.nome}</span>...</h2>
+
+            <Form
                 columnStart="4"
                 columnEnd="8"
                 rowStart="2"
                 rowEnd="6">
                 
-            <Input label="Nome"
-                columnstart="4"
-                columnend="8" 
-                rowstart="1"
-                rowend="1"
-                onChange={(e) => setNome(e.target.value)}
-                value={nome}
-                readonly="true"
-                />
 
+            <div className="col-1-4 add-user">Adicione as pessoas que moram com você!</div>
 
-
+            <div className="col-1-4 add-user">Adicione dados do seus veículos</div>
+   
 
 
             </Form>
@@ -39,8 +37,5 @@ export default function CompleteUser(){
 
         </div>
     )
-
-
-
 
 }

@@ -46,7 +46,7 @@ class Card extends React.Component {
                 {
                     (!this.state.isOpened) ?
                         <React.Fragment>
-                            <div className="card-titulo--ativo">{this.props.titulo}</div>
+                            <div className={`${this.props.warning ? 'card-titulo--warning':'card-titulo--ativo'}`}>{this.props.titulo}</div>
                             <img alt="icone" src={this.props.imagem} className="card-imagem"></img>
                         </React.Fragment>
                         :
