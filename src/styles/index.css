@@ -499,6 +499,17 @@ body {
 
 }
 
+.card-titulo--warning{
+    grid-row-start: 1;
+    grid-row-end: 1;
+
+    background-color: #E7E2D2;
+    padding: 5%;
+    font-family: "Raleway-Bold";
+
+}
+
+
 .card-container-titulo--ativo_aberto {
 
 
@@ -693,6 +704,13 @@ body {
     grid-column-start: 1;
     grid-column-end: 4;
 }
+
+.col-1-6 {
+    grid-column-start: 1;
+    grid-column-end: 6;
+}
+
+
 
 .col-11-13 {
     grid-column-start: 11;
@@ -1127,5 +1145,29 @@ body {
 
     color: rgba(49, 116, 173, .5);
     text-decoration: none;
+
+}
+
+.add-user{
+    background-image: url('/images/add-user.png');
+    background-repeat: no-repeat;
+    background-size: 5%;
+    padding-left: 6%;
+    height: 30px;
+    cursor: pointer;
+    padding-top: 2px;
+
+}
+
+
+.add-user:hover{
+
+    box-shadow: 2px 4px 5px #B0B0B0;
+
+}
+
+.add-user:active{
+
+    box-shadow: inset 2px 4px 5px #B0B0B0;
 
 }

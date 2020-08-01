@@ -36,7 +36,7 @@ class Modal extends React.Component {
         return (
             <div 
                 className={`modal ${this.state.modalOpen ? 'modal--opened' : 'modal--closed'} `}>
-                <div className={`${this.state.modalOpen ? 'modal-content--opened' : 'modal-content--closed'} col-5-9 row-2-4`}>
+                <div className={`${this.state.modalOpen ? 'modal-content--opened' : 'modal-content--closed'} ${this.props.className}`}>
                     <div className="modal-header row-1-1 col-1-13">
                         <div className="col-1-11 modal-header-text">
                             {this.props.title}

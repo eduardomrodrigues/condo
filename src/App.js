@@ -48,6 +48,12 @@ class App extends React.Component {
 
   }
 
+  handleOpenModal(){
+    this.modalLogin.current.handleOpenModal()
+    
+
+  }
+
 
   handleCloseModal(){
     this.modalLogin.current.handleCloseModal()
@@ -77,7 +83,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <ModalProvider value={{ onLoginSuccess: () => this.onLoginSuccess(), onLoginUnsuccess: () => { this.onLoginUnsuccess() } }}>
+      <ModalProvider value={{ onLoginSuccess: () => this.onLoginSuccess(), onLoginUnsuccess: () => { this.onLoginUnsuccess() }, abrirModalLogin: () => {this.handleOpenModal()} }}>
         <React.Fragment>
           <Router>
 
@@ -85,8 +91,7 @@ class App extends React.Component {
             <Modal title="Entrar!"
               modalOpen={this.state.modalOpen}
               ref={this.modalLogin}
-              rows="5"
-              columns="4">
+              className="col-5-9 row-2-4">
 
               <Login ref={this.modalUser} onUserLogin={() => this.onUserLogin()} closeModal={() => this.handleCloseModal} />
 

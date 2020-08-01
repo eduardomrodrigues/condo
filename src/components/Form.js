@@ -33,7 +33,7 @@ class Form extends React.Component {
                     gridColumn: `${this.props.columnStart} / ${this.props.columnEnd}`,
                     gridRow: `${this.props.rowStart} / ${this.props.rowEnd}`
                 }}
-                className={`form-grid ${this.props.className}` }>
+                className={`form-grid ` }>
                 {this.props.children}
             </form>
 
