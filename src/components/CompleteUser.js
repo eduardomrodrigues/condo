@@ -1,19 +1,24 @@
 import React from 'react'
 
 import Form from "./Form";
-
+import Modal from './Modal'
 
 
 export default function CompleteUser({ user }) {
 
 
     const [usuario] = React.useState({
+        modalComplemento: false,
         nome: user.name,
         email: user.email
-
-
     })
 
+    const modalLoginComplemento = React.useRef()
+
+
+    const onClickComplemento = () => {
+        modalLoginComplemento.current.handleOpenModal()
+    }
 
     return (
         <div className="col-2-12">
@@ -24,12 +29,23 @@ export default function CompleteUser({ user }) {
                 columnEnd="8"
                 rowStart="2"
                 rowEnd="6">
-                
 
-            <div className="col-1-4 add-user">Adicione as pessoas que moram com você!</div>
 
-            <div className="col-1-4 add-user">Adicione dados do seus veículos</div>
-   
+                <Modal title="Complemente seu cadastro"
+                    modalOpen={usuario.modalComplemento}
+                    ref={modalLoginComplemento} className="col-1-11 row-2-6">
+
+
+                </Modal>
+
+
+
+                <div 
+                    onClick={onClickComplemento}
+                    className="col-1-4 add-user">Adicione as pessoas que moram com você!</div>
+
+                <div className="col-1-4 add-user">Adicione dados do seus veículos</div>
+
 
 
             </Form>
