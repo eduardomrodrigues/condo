@@ -4,7 +4,7 @@ import React from 'react'
 function Input({ columnstart, columnend, rowstart, rowend, name, label, type, errorMessage, ...props }) {
     
     
-    const [error, setError] = React.useState(errorMessage)
+    const [error, setError] = React.useState('')
     const [success, setSuccess] = React.useState(false)
     
     const to = React.useRef(null)

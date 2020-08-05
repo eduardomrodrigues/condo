@@ -68,39 +68,39 @@ function NewUser() {
 
     const handleSubmit = () => {
 
-
+        setEmailError("")
         let isValid = true;
 
 
         if (!email) {
             isValid = false;
-            setEmailError("O campo e-mail é obrigatório");
+            setEmailError("O campo e-mail é obrigatório")
         }
 
         if (!nome) {
             isValid = false;
-            setNomeError("O campo nome é obrigatório");
+            setNomeError("O campo nome é obrigatório")
         }
 
         if (!apartamento) {
             isValid = false;
-            setApartamentoError("Qual o número do seu apartamento?");
+            setApartamentoError("Qual o número do seu apartamento?")
         }
 
         if (!senha) {
             isValid = false;
-            setSenhaError("Informe uma senha");
+            setSenhaError("Informe uma senha")
         }
 
         console.log(confirmacaoSenha)
         if (!confirmacaoSenha) {
             isValid = false;
-            setConfirmacaoSenhaError("Confirme sua senha");
+            setConfirmacaoSenhaError("Confirme sua senha")
         }
 
         if (senha !== confirmacaoSenha) {
             isValid = false;
-            setSenhaError("As senhas não conferem");
+            setSenhaError("As senhas não conferem")
             setConfirmacaoSenha('')
         }
 
