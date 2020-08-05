@@ -1,5 +1,5 @@
-import React from 'react';
-import Header from "./components/Header";
+import React from 'react'
+import Header from "./components/Header"
 import Body from "./components/Body";
 import PrivateRouter from './components/PrivateRouter'
 
@@ -24,55 +24,33 @@ function b64DecodeUnicode(str) {
 }
 
 
-class App extends React.Component {
+function App() {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      modalOpen: false,
-    }
+  const [modalOpen, setModalOpen] = React.useState(false)
 
-    this.modalLogin = React.createRef()
-    this.modalUser = React.createRef()
-    this.inputHeader = React.createRef()
+  const onUserLogin = () => {
 
-    this.onUserLogin = this.onUserLogin.bind(this)
-    this.onLoginSuccess = this.onLoginSuccess.bind(this)
-    this.onLoginUnsuccess = this.onLoginUnsuccess.bind(this)
-    this.handleCloseModal = this.handleCloseModal.bind(this)
-
-  }
-  onUserLogin() {
-
-    this.inputHeader.current.onUserLogin()
 
   }
 
-  handleOpenModal(){
-    this.modalLogin.current.handleOpenModal()
-    
-
+  const handleOpenModal = () => {
+    setModalOpen(true)
   }
 
 
-  handleCloseModal(){
-    this.modalLogin.current.handleCloseModal()
-    
-
+  const handleCloseModal = () => {
+    setModalOpen(false)
   }
 
-  onLoginUnsuccess() {
-    this.modalLogin.current.handleOpenModal()
-    this.inputHeader.current.onUserLogin()
-
+  const onLoginUnsuccess = () => {
+    setModalOpen(true)
   }
 
-  onLoginSuccess() {
-
-    this.inputHeader.current.onUserLogin()
+  const onLoginSuccess = () => {
+    setModalOpen(true)
   }
 
-  recuperarNomeUsuario() {
+  const recuperarNomeUsuario = () => {
 
 
     let usuarioLogado = b64DecodeUnicode(localStorage.getItem(constants.KEY_CONDO_STORAGE).split('.')[1])
@@ -81,68 +59,65 @@ class App extends React.Component {
   }
 
 
-  render() {
-    return (
-      <ModalProvider value={{ onLoginSuccess: () => this.onLoginSuccess(), onLoginUnsuccess: () => { this.onLoginUnsuccess() }, abrirModalLogin: () => {this.handleOpenModal()} }}>
-        <React.Fragment>
-          <Router>
+  return (
+    <ModalProvider value={{ onLoginSuccess: () => onLoginSuccess(), onLoginUnsuccess: () => { onLoginUnsuccess() }, abrirModalLogin: () => { handleOpenModal() } }}>
+      <React.Fragment>
+        <Router>
 
 
-            <Modal title="Entrar!"
-              modalOpen={this.state.modalOpen}
-              ref={this.modalLogin}
-              className="col-5-9 row-2-4">
+          <Modal title="Entrar!"
+            modalOpen={modalOpen}
+            className="col-5-9 row-2-4">
 
-              <Login ref={this.modalUser} onUserLogin={() => this.onUserLogin()} closeModal={() => this.handleCloseModal} />
+            <Login onUserLogin={() => onUserLogin()} closeModal={() => handleCloseModal} />
 
-            </Modal>
+          </Modal>
 
 
 
-            <Header ref={this.inputHeader} />
-            <Switch>
-              <Route exact path="/">
-                <div className="welcome-grid">
+          <Header />
+          <Switch>
+            <Route exact path="/">
+              <div className="welcome-grid">
 
-                  {localStorage.getItem(constants.KEY_CONDO_STORAGE) !== null ?
+                {localStorage.getItem(constants.KEY_CONDO_STORAGE) !== null ?
 
 
-                    <>
-                      <h1 style={{ textAlign: 'center' }}>Bem vindo, <span style={{ color: '#4581B5' }}>{this.recuperarNomeUsuario()}</span></h1>
-                      <p style={{ minHeight: '130px', textAlign: 'center' }}>
-                        Clique no menu <a href="/dashboard" style={{ color: '#4581B5', textDecoration: 'underline' }}>Meu condomínio</a> para acessar começar!
+                  <>
+                    <h1 style={{ textAlign: 'center' }}>Bem vindo, <span style={{ color: '#4581B5' }}>{recuperarNomeUsuario()}</span></h1>
+                    <p style={{ minHeight: '130px', textAlign: 'center' }}>
+                      Clique no menu <a href="/dashboard" style={{ color: '#4581B5', textDecoration: 'underline' }}>Meu condomínio</a> para acessar começar!
                                     </p>
-                    </>
-                    :
-                    <>
-                      <h1>Bem vindo ao <span style={{ color: '#4581B5' }}>UpLife Residence</span></h1>
-                      <p>
-                        Aqui você poderá alugar sua churrasqueira, reservar o salão de festas, participar dos acontecimentos do nosso condomínio.
+                  </>
+                  :
+                  <>
+                    <h1>Bem vindo ao <span style={{ color: '#4581B5' }}>UpLife Residence</span></h1>
+                    <p>
+                      Aqui você poderá alugar sua churrasqueira, reservar o salão de festas, participar dos acontecimentos do nosso condomínio.
                                         Seja bem vindo! Se você já tem o cadastro, basta clicar em <span style={{ color: '#4581B5' }}>Entrar</span>. <br />
                                         Se você já tem seu cadastro informe com seu email e sua senha, caso contrário
                                         clique em <span style={{ color: '#4581B5' }}>quero me cadastrar</span>
-                      </p>
-                    </>
-                  }
+                    </p>
+                  </>
+                }
 
 
-                  <footer>
-                    <div></div>
-                  </footer>
-                </div>
-              </Route>
+                <footer>
+                  <div></div>
+                </footer>
+              </div>
+            </Route>
 
-              <PrivateRouter exact path="/dashboard" component={Body} />
+            <PrivateRouter exact path="/dashboard" component={Body} />
 
-              <Route exact path="/user" component={NewUser} />
-            </Switch>
-          </Router>
-        </React.Fragment>
-      </ModalProvider>
-    );
-  }
-
+            <Route exact path="/user" component={NewUser} />
+          </Switch>
+        </Router>
+      </React.Fragment>
+    </ModalProvider>
+  );
 }
 
 
-export default App;
+
+export default App

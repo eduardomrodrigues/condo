@@ -1,86 +1,59 @@
 import React from 'react'
 
-let to = {}
 
-class Input extends React.Component {
+function Input({ columnstart, columnend, rowstart, rowend, name, label, type, errorMessage, ...props }) {
+    
+    
+    const [error, setError] = React.useState(errorMessage)
+    const [success, setSuccess] = React.useState(false)
+    
+    const to = React.useRef(null)
+    
+    React.useEffect(() => {
 
+        console.log(errorMessage)
+        if(errorMessage){
+            setError(errorMessage)
+            to.current = window.setTimeout(() => {
+                setError(null)
+            }, 4500)
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            errorMessage: '',
-            success: false
-        }
+        } 
 
-        this.handlerOnFocus = this.handlerOnFocus.bind(this)
+        return () => clearTimeout(to.current);
 
-    }
-
-
-    handlerOnFocus() {
-        this.setState({
-            errorMessage: '',
-            success: false
-        })
-
-    }
-
-
-    addErrorMessage(message) {
-
-        this.setState({
-            errorMessage: message
-        })
+    }, [errorMessage])
 
 
-        to = window.setTimeout(() => {
+    const handlerOnFocus = () => {
 
-            this.setState({ errorMessage: null })
-
-        }, 6000)
+        setError('')
+        setSuccess(false)
 
     }
 
+    return (
+        <>
+            <div style={{
+                gridColumn: `${columnstart} / ${columnend}`,
+                gridRow: `${rowstart} / ${rowend}`
+            }}>
+                <label htmlFor={`id-${name}`}>{label}</label>
+                <input
+                    {...props}
+                    name={name}
+                    onFocus={() => handlerOnFocus()}
+                    className={`input-text ${success ? "input-text--success" : null}`}
+                    type={`${type}`} id={`id-${name}`}></input>
 
-    componentWillUnmount(){
-
-        clearTimeout(to);
-
-    }
-
-
-    addSuccess() {
-
-        this.setState({
-            success: true
-        })
-    }
-
-
-    render() {
-
-        return (
-            <>
-                <div style={{
-                    gridColumn: `${this.props.columnstart} / ${this.props.columnend}`,
-                    gridRow: `${this.props.rowstart} / ${this.props.rowend}`
-                }}>
-                    <label htmlFor={`id-${this.props.name}`}>{this.props.label}</label>
-                    <input {...this.props}
-                        onFocus={() => this.handlerOnFocus()}
-                        ref={this.props.id}
-                        className={`input-text ${this.state.success ? "input-text--success" : null}`}
-                        type={`${this.props.type}`} id={`id-${this.props.name}`}></input>
-
-                        <div  className={`input-invalid-message ${!this.state.errorMessage ? 'input-invalid-message--hide': 'input-invalid-message--show'}`} >
-                            {this.state.errorMessage}
-                        </div>
+                <div className={`input-invalid-message ${!error ? 'input-invalid-message--hide' : 'input-invalid-message--show'}`} >
+                    {error}
                 </div>
-            </>
-        )
+            </div>
+        </>
+    )
 
 
-    }
 
 }
 
