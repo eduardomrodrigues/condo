@@ -3,14 +3,13 @@ import React from 'react'
 
 function Input({ columnstart, columnend, rowstart, rowend, name, label, type, errorMessage, ...props }) {
     
-    
     const [error, setError] = React.useState('')
     const [success, setSuccess] = React.useState(false)
     
     const to = React.useRef(null)
     
     React.useEffect(() => {
-
+        console.log("Aquiii")
         console.log(errorMessage)
         if(errorMessage){
             setError(errorMessage)
@@ -19,8 +18,6 @@ function Input({ columnstart, columnend, rowstart, rowend, name, label, type, er
             }, 4500)
 
         } 
-
-        return () => clearTimeout(to.current);
 
     }, [errorMessage])
 

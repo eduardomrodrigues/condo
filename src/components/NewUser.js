@@ -68,7 +68,6 @@ function NewUser() {
 
     const handleSubmit = () => {
 
-        setEmailError("")
         let isValid = true;
 
 
@@ -111,13 +110,17 @@ function NewUser() {
 
 
         isValid && postUser()
+
+        setTimeout(() => [setEmailError,
+            setSenhaError,setNomeError,
+            setConfirmacaoSenhaError,
+            setApartamentoError].forEach(s => s("")),2000)
     }
 
 
     const handleChange = (event) => {
 
         const { name, value } = event.target;
-        console.log(name)
 
         if (name === 'nome') {
             setNome(value)
@@ -155,7 +158,6 @@ function NewUser() {
     return (
         <>
             <div className="form-grid">
-
 
                 {!messageSuccess ?
 
