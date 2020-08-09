@@ -4,11 +4,17 @@ import ModalContext from './ModalContext'
 import { Link } from 'react-router-dom'
 
 
-function Header() {
+function Header({isLogged}) {
 
     const context = React.useContext(ModalContext)
 
-    const [userLogged, setUserLogged] = React.useState(false)
+    const [userLogged, setUserLogged] = React.useState(context.isLogged())
+    
+
+    React.useEffect(() => {
+        setUserLogged(isLogged)
+    
+    },[isLogged])
 
     const handleSairClick = () => {
 

@@ -5,7 +5,8 @@ import TowerButtons from "./TowerButtons";
 import Button from "./Button";
 import axios from 'axios'
 import constants from '../const'
-
+import { Redirect } from 'react-router-dom';
+import ModalContext from './ModalContext'
 
 function NewUser() {
 
@@ -20,25 +21,12 @@ function NewUser() {
     const [apartamentoError, setApartamentoError] = React.useState('')
     const [senhaError, setSenhaError] = React.useState('')
     const [confirmacaoSenhaError, setConfirmacaoSenhaError] = React.useState('')
-    
-    
-    
+    const [successRedirect, setSuccessRedirect] = React.useState(false)
+
     const [success, setSuccess] = React.useState(false)
     const [messageSuccess, setMessageSuccess] = React.useState(false)
 
-    let timerSuccessMessage = React.useRef(null)
-    let redirect = React.useRef(null)
-
-
-
-    React.useEffect(() => {
-        return () => destroyAllTimeouts() 
-    })
-
-    const destroyAllTimeouts = () => {
-        clearTimeout(timerSuccessMessage.current)
-        clearTimeout(redirect.current)
-    }
+    const context = React.useContext(ModalContext)
 
     const postUser = () => {
 
@@ -91,31 +79,24 @@ function NewUser() {
             setSenhaError("Informe uma senha")
         }
 
-        console.log(confirmacaoSenha)
         if (!confirmacaoSenha) {
-            isValid = false;
+            isValid = false
             setConfirmacaoSenhaError("Confirme sua senha")
         }
 
         if (senha !== confirmacaoSenha) {
             isValid = false;
-            setSenhaError("As senhas não conferem")
             setConfirmacaoSenha('')
         }
 
         if (!validateEmail(email)) {
             isValid = false;
-            setEmailError("Email inválido")
         }
-
 
         isValid && postUser()
 
-        setTimeout(() => [setEmailError,
-            setSenhaError,setNomeError,
-            setConfirmacaoSenhaError,
-            setApartamentoError].forEach(s => s("")),2000)
     }
+
 
 
     const handleChange = (event) => {
@@ -136,22 +117,47 @@ function NewUser() {
     }
 
 
+    const handleFocus = () => {
+        setNomeError("")
+        setEmailError("")
+        setApartamentoError("")
+        setSenhaError("")
+        setConfirmacaoSenhaError("")
+
+    }
+
+
+    React.useEffect(() => {
+
+        if (!messageSuccess) {
+            return
+        }
+        const timeOut = setTimeout(() => {
+            setSuccessRedirect(true)
+        }, 2000)
+
+        return () => clearTimeout(timeOut)
+    }, [messageSuccess])
+
+
+    React.useEffect(() => {
+        if (!success) {
+            return
+        }
+
+        const redirect = setTimeout(() => {
+            setMessageSuccess(true)
+        }, 500)
+
+        return () => clearTimeout(redirect)
+    }, [success])
+
 
     const handleSuccess = ({ token }) => {
 
-
         localStorage.setItem(constants.KEY_CONDO_STORAGE, token)
-
         setSuccess(true)
-
-        timerSuccessMessage = setTimeout(() => {
-            setMessageSuccess(true)
-
-            redirect.current = setTimeout(() => {
-                window.location = '/dashboard'
-            }, 2000)
-
-        }, 500)
+        context.onLoginSuccess()
     }
 
 
@@ -159,10 +165,10 @@ function NewUser() {
         <>
             <div className="form-grid">
 
-                {!messageSuccess ?
+                {!success ?
 
                     <>
-                        <h1 className={`form-titulo ${success ? 'hiding' : null}`}>Bem vindo, <span className="nome-logado-sucesso">vamos criar seu login?</span></h1>
+                        <h1 className={`form-titulo`}>Bem vindo, <span className="nome-logado-sucesso">vamos criar seu login?</span></h1>
                         <Form
                             handleSubmit={() => {
                                 handleSubmit()
@@ -171,11 +177,12 @@ function NewUser() {
                             rowEnd="7"
                             columnStart="4"
                             columnEnd="11"
-                            className={`form-single ${success ? 'hiding' : null}`}>
+                            className={`form-single`}>
 
 
 
                             <Input
+                                onFocus={() => { handleFocus() }}
                                 errorMessage={nomeError}
                                 label="nome*"
                                 type="text"
@@ -189,6 +196,7 @@ function NewUser() {
                             />
 
                             <Input
+                                onFocus={() => { handleFocus() }}
                                 errorMessage={emailError}
                                 label="e-mail*"
                                 type="email"
@@ -202,6 +210,7 @@ function NewUser() {
                             />
 
                             <Input
+                                onFocus={() => { handleFocus() }}
                                 errorMessage={senhaError}
                                 label="senha*"
                                 type="password"
@@ -216,6 +225,7 @@ function NewUser() {
 
 
                             <Input
+                                onFocus={() => { handleFocus() }}
                                 errorMessage={confirmacaoSenhaError}
                                 label="confimação de senha*"
                                 type="password"
@@ -229,6 +239,7 @@ function NewUser() {
                             />
 
                             <Input
+                                onFocus={() => { handleFocus() }}
                                 errorMessage={apartamentoError}
                                 label="apartamento*"
                                 type="number"
@@ -262,13 +273,15 @@ function NewUser() {
 
                         </Form>
                     </> :
-                    <>
-                        <h1 style={{ opacity: messageSuccess ? 1 : 0 }} className='form-titulo'>Bem vindo, <span className="nome-logado-sucesso">{nome}</span></h1>
-                        <div style={{ opacity: messageSuccess ? 1 : 0 }} className="col-6-11 row-3-7">
-                            <h2>Preparando sua home...</h2>
-                            <img alt="progresso" src='/images/progress.gif' />
-                        </div>
-                    </>
+                    successRedirect ? <Redirect to='/dashboard'/> :
+                        <>
+                            <h1 style={{ opacity: messageSuccess ? 1 : 0 }} className='form-titulo'>Bem vindo, <span className="nome-logado-sucesso">{nome}</span></h1>
+                            <div style={{ opacity: messageSuccess ? 1 : 0 }} className="col-6-11 row-3-7">
+                                <h2>Preparando sua home...</h2>
+                                <img alt="progresso" src='/images/progress.gif' />
+                            </div>
+                        </>
+
                 }
 
             </div>

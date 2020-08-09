@@ -5,19 +5,21 @@ import Button from "./Button";
 import { Link } from "react-router-dom";
 import axios from 'axios'
 import constants from '../const'
+import ModalContext from './ModalContext'
 
 
-function Login({ onUserLogin, closeModal }) {
+function Login() {
 
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [emailError, setEmailError] = React.useState('')
   const [passwordError, setPasswordError] = React.useState('')
 
-
-
   const [messageError, ] = React.useState('')
   const [location, ] = React.useState('')
+
+  const context = React.useContext(ModalContext)
+
 
 
   const handleSubmit = () => {
@@ -43,11 +45,9 @@ function Login({ onUserLogin, closeModal }) {
         name: email,
         senha: password
       }).then((result) => {
-
         localStorage.setItem(constants.KEY_CONDO_STORAGE, result.data.token)
       }).then(() => {
-        window.location = location
-        onUserLogin()
+        context.onLoginSuccess()
       })
         .catch((error) => {
 
@@ -77,6 +77,10 @@ function Login({ onUserLogin, closeModal }) {
       setPassword(value)
     }
 
+  }
+
+  const handleQueroMeCadastrar = () => {
+    context.fecharModalLogin()
   }
 
   return (
@@ -124,7 +128,7 @@ function Login({ onUserLogin, closeModal }) {
         />
 
         <Link
-          onClick={closeModal}
+          onClick={() => handleQueroMeCadastrar()}
           style={{ gridArea: "6 / 1 / 6 / 6" }} to="/user">
           Quero me cadastrar
           </Link>

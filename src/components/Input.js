@@ -4,30 +4,17 @@ import React from 'react'
 function Input({ columnstart, columnend, rowstart, rowend, name, label, type, errorMessage, ...props }) {
     
     const [error, setError] = React.useState('')
-    const [success, setSuccess] = React.useState(false)
-    
-    const to = React.useRef(null)
+    const [success, ] = React.useState(false)
     
     React.useEffect(() => {
-        console.log("Aquiii")
-        console.log(errorMessage)
         if(errorMessage){
             setError(errorMessage)
-            to.current = window.setTimeout(() => {
-                setError(null)
-            }, 4500)
-
-        } 
+        } else{
+            setError('')
+        }
 
     }, [errorMessage])
 
-
-    const handlerOnFocus = () => {
-
-        setError('')
-        setSuccess(false)
-
-    }
 
     return (
         <>
@@ -39,7 +26,6 @@ function Input({ columnstart, columnend, rowstart, rowend, name, label, type, er
                 <input
                     {...props}
                     name={name}
-                    onFocus={() => handlerOnFocus()}
                     className={`input-text ${success ? "input-text--success" : null}`}
                     type={`${type}`} id={`id-${name}`}></input>
 

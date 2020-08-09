@@ -1,13 +1,14 @@
 import React from 'react'
+import ModalContext from './ModalContext'
 
-function Modal({ modalOpen, className, title, children }) {
-
-
+function Modal({modalOpen, className, title, children }) {
 
     const [modal, setModal] = React.useState(modalOpen)
 
+    const context = React.useContext(ModalContext)
+
     const handleCloseModal = () => {
-        setModal(false)
+        context.fecharModalLogin()        
     }
 
     React.useEffect(() => {

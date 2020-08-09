@@ -27,11 +27,8 @@ function b64DecodeUnicode(str) {
 function App() {
 
   const [modalOpen, setModalOpen] = React.useState(false)
+  const [login, setLogin] = React.useState(false)
 
-  const onUserLogin = () => {
-
-
-  }
 
   const handleOpenModal = () => {
     setModalOpen(true)
@@ -44,10 +41,16 @@ function App() {
 
   const onLoginUnsuccess = () => {
     setModalOpen(true)
+    setLogin(false)
   }
 
   const onLoginSuccess = () => {
-    setModalOpen(true)
+    setModalOpen(false)
+    setLogin(true)
+  }
+
+  const isLogged = () => {
+    return localStorage.getItem(constants.KEY_CONDO_STORAGE) !== null
   }
 
   const recuperarNomeUsuario = () => {
@@ -60,7 +63,11 @@ function App() {
 
 
   return (
-    <ModalProvider value={{ onLoginSuccess: () => onLoginSuccess(), onLoginUnsuccess: () => { onLoginUnsuccess() }, abrirModalLogin: () => { handleOpenModal() } }}>
+    <ModalProvider value={{ isLogged: () => isLogged(), 
+      fecharModalLogin: () => {handleCloseModal()}, 
+      onLoginSuccess: () => onLoginSuccess(), 
+      onLoginUnsuccess: () => { onLoginUnsuccess() }, 
+      abrirModalLogin: () => { handleOpenModal() } }}>
       <React.Fragment>
         <Router>
 
@@ -69,13 +76,13 @@ function App() {
             modalOpen={modalOpen}
             className="col-5-9 row-2-4">
 
-            <Login onUserLogin={() => onUserLogin()} closeModal={() => handleCloseModal} />
+            <Login  />
 
           </Modal>
 
 
 
-          <Header />
+          <Header isLogged={login}/>
           <Switch>
             <Route exact path="/">
               <div className="welcome-grid">
