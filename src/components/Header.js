@@ -42,7 +42,7 @@ function Header({isLogged}) {
                 <nav className="header-menu">
                     <ul>
                         <li className="header-menu-item">
-                            <Link to='/dashboard'>Meu condomínio</Link>
+                            <Link className="nav-item" to='/dashboard'>Meu condomínio</Link>
                         </li>
                     </ul>
                 </nav>

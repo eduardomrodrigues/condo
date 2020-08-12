@@ -16,7 +16,6 @@ function Login() {
   const [passwordError, setPasswordError] = React.useState('')
 
   const [messageError, ] = React.useState('')
-  const [location, ] = React.useState('')
 
   const context = React.useContext(ModalContext)
 
@@ -129,7 +128,8 @@ function Login() {
 
         <Link
           onClick={() => handleQueroMeCadastrar()}
-          style={{ gridArea: "6 / 1 / 6 / 6" }} to="/user">
+          style={{ gridArea: "6 / 1 / 6 / 6" }} 
+          to="/user">
           Quero me cadastrar
           </Link>
         <Button

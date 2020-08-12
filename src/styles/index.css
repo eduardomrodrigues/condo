@@ -1122,6 +1122,12 @@ body {
 
 }
 
+
+.header-menu-item .nav-item{
+
+    color: black;
+}
+
 .header-menu-item:last-child {
     margin-right: 0;
 }

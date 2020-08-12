@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { getUser } from '../services/UserService'
 import constants from '../const'
-import Card from './Card'
-import VoteCard from './VoteCard'
-import PartyCard from './PartyCard'
-import GymCard from './GymCard'
-import BarbecueCard from './BarbecueCard'
-import CompleteUser from './CompleteUser'
+const Card = React.lazy(() => import('./Card'))
+const VoteCard = React.lazy(() => import('./VoteCard'))
+const PartyCard = React.lazy(() => import('./PartyCard'))
+const GymCard = React.lazy(() => import('./GymCard'))
+const BarbecueCard = React.lazy(() => import('./BarbecueCard'))
+const CompleteUser = React.lazy(() => import('./CompleteUser'))
 
 const b64DecodeUnicode = (str) => {
     // Going backwards: from bytestream, to percent-encoding, to original string.
@@ -45,31 +45,34 @@ function Body() {
 
 
     return (
-        <div className="corpo">
-            {!isComplete ?
-                <Card warning="true" titulo={`Complete seu cadastro`} imagem="/images/complete.png" >
-                    <CompleteUser user={user} />
+
+        <Suspense fallback={<div>Carregando...</div>}>
+
+            <div className="corpo">
+                {!isComplete ?
+                    <Card warning="true" titulo={`Complete seu cadastro`} imagem="/images/complete.png" >
+                        <CompleteUser user={user} />
+                    </Card>
+                    : null}
+
+                <Card titulo={`Votação em andamentos`} imagem="/images/vote.png" >
+                    <VoteCard />
                 </Card>
-                : null}
-
-            <Card titulo={`Votação em andamentos`} imagem="/images/vote.png" >
-                <VoteCard />
-            </Card>
 
 
-            <Card titulo="Reserva de salão de festas" imagem="/images/party.png">
-                <PartyCard />
-            </Card>
+                <Card titulo="Reserva de salão de festas" imagem="/images/party.png">
+                    <PartyCard />
+                </Card>
 
-            <Card titulo="Reserva academia" imagem="/images/gym.png">
-                <GymCard />
-            </Card>
+                <Card titulo="Reserva academia" imagem="/images/gym.png">
+                    <GymCard />
+                </Card>
 
-            <Card titulo="Reserva churrasqueira" imagem="/images/barbecue.png">
-                <BarbecueCard />
-            </Card>
-        </div>
-
+                <Card titulo="Reserva churrasqueira" imagem="/images/barbecue.png">
+                    <BarbecueCard />
+                </Card>
+            </div>
+        </Suspense>
     )
 }
 
