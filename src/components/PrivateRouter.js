@@ -5,54 +5,37 @@ import ModalContext from './ModalContext'
 import { isCertifiedValid } from '../services/CertificadoService'
 
 
-class PrivateRouter extends React.Component {
-    static contextType = ModalContext
+function PrivateRouter({ component: Component, ...rest }) {
 
-    constructor(props) {
-        super(props)
+    const context = React.useContext(ModalContext)
 
-        this.state = {
-            isValid: false
-        }
-    }
+    const [isValid, setIsValid] = React.useState(false)
 
-    componentDidMount() {
+
+    React.useEffect(() => {
         isCertifiedValid().then((result) => {
             if (result.status === 200) {
-                // console.log(this.context)
-                this.context.onLoginSuccess()
-                this.setState({
-                    isValid: true
-                })
+                context.onLoginSuccess()
+                setIsValid(true)
             } else {
-                this.setState({
-                    isValid: false
-                })
-                this.context.onLoginUnsuccess()
+                setIsValid(false)
+                context.onLoginUnsuccess()
             }
-        }).catch((err) => {
-            this.setState({
-                isValid: false
-            })
-            this.context.onLoginUnsuccess()
+        }).catch(() => {
+            setIsValid(false)
+            context.onLoginUnsuccess()
         })
-    }
+    }, [context])
 
-    render() {
-        const { component: Component, ...rest } = this.props
-        
-        return (
-            <Route
-                {...rest}
-                render={props => (this.state.isValid === true)
-                    ? (<Component {...props} />)
-                    : (<SemAcesso isValid={this.state.isValid}/>)
+    return (
+        <Route {...rest} render={props => (isValid === true)
+            ? (<Component {...rest} />)
+            : (<SemAcesso isValid={isValid} />)
 
-                }
+        }
 
-            />
-        )
-    }
+        />
+    )
 }
 
 export default PrivateRouter

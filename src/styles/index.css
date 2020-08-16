@@ -143,7 +143,7 @@ a:hover {
 
     animation: show 200ms linear;
     animation-fill-mode: forwards;
-    height: 20px;
+    height: 25px;
 
 
 }
@@ -1120,6 +1120,12 @@ body {
     padding-bottom: 3px;
     margin-right: 10px;
 
+}
+
+
+.header-menu-item .nav-item{
+
+    color: black;
 }
 
 .header-menu-item:last-child {

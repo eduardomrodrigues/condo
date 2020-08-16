@@ -1,64 +1,57 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { getUser } from '../services/UserService'
 import constants from '../const'
-import Card from './Card'
-import VoteCard from './VoteCard'
-import PartyCard from './PartyCard'
-import GymCard from './GymCard'
-import BarbecueCard from './BarbecueCard'
-import CompleteUser from './CompleteUser'
+const Card = React.lazy(() => import('./Card'))
+const VoteCard = React.lazy(() => import('./VoteCard'))
+const PartyCard = React.lazy(() => import('./PartyCard'))
+const GymCard = React.lazy(() => import('./GymCard'))
+const BarbecueCard = React.lazy(() => import('./BarbecueCard'))
+const CompleteUser = React.lazy(() => import('./CompleteUser'))
 
-function b64DecodeUnicode(str) {
+const b64DecodeUnicode = (str) => {
     // Going backwards: from bytestream, to percent-encoding, to original string.
     return decodeURIComponent(atob(str).split('').map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 }
 
-function recuperarToken() {
+const recuperarToken = () => {
     return localStorage.getItem(constants.KEY_CONDO_STORAGE)
 }
 
 
 
-class Body extends React.Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            isComplete: false,
-            user: {}
-        }
-    }
+function Body() {
 
 
+    const [isComplete, setComplete] = React.useState(false)
+    const [user, setUser] = React.useState({})
 
-    componentDidMount() {
+
+    React.useEffect(() => {
         let token = recuperarToken()
         let usuarioLogado = b64DecodeUnicode(token.split('.')[1])
         let _email = JSON.parse(usuarioLogado).email
 
         getUser(_email, token).then((user) => {
 
-            this.setState({
-                isComplete: user.data[0].isComplete,
-                user: user.data[0]
-            })
+            setComplete(user.data[0].isComplete)
+            setUser(user.data[0])
+
         }).catch((error) => {
 
         })
-
-    }
-
+    }, [])
 
 
+    return (
 
-    render() {
-        return (
+        <Suspense fallback={<div>Carregando...</div>}>
+
             <div className="corpo">
-                {!this.state.isComplete ?
+                {!isComplete ?
                     <Card warning="true" titulo={`Complete seu cadastro`} imagem="/images/complete.png" >
-                        <CompleteUser user={this.state.user}/>
+                        <CompleteUser user={user} />
                     </Card>
                     : null}
 
@@ -79,9 +72,8 @@ class Body extends React.Component {
                     <BarbecueCard />
                 </Card>
             </div>
-
-        )
-    }
+        </Suspense>
+    )
 }
 
 

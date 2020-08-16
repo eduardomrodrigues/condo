@@ -1,55 +1,39 @@
 import React from 'react'
+import ModalContext from './ModalContext'
 
+function Modal({modalOpen, className, title, children }) {
 
-class Modal extends React.Component {
+    const [modal, setModal] = React.useState(modalOpen)
 
+    const context = React.useContext(ModalContext)
 
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            modalOpen: this.props.modalOpen
-        }
-
-
-        this.handleCloseModal = this.handleCloseModal.bind(this)
-        this.handleOpenModal = this.handleOpenModal.bind(this)
+    const handleCloseModal = () => {
+        context.fecharModalLogin()        
     }
 
-    handleCloseModal() {
+    React.useEffect(() => {
+        setModal(modalOpen)
+    }, [modalOpen])
 
-        this.setState({
-            modalOpen: false
-        })
 
-    }
 
-    handleOpenModal() {
-        this.setState({
-            modalOpen: true
-        })
+    return (
 
-    }
-
-    render() {
-
-        return (
-            <div 
-                className={`modal ${this.state.modalOpen ? 'modal--opened' : 'modal--closed'} `}>
-                <div className={`${this.state.modalOpen ? 'modal-content--opened' : 'modal-content--closed'} ${this.props.className}`}>
-                    <div className="modal-header row-1-1 col-1-13">
-                        <div className="col-1-11 modal-header-text">
-                            {this.props.title}
-                        </div>
-                        <div className="col-11-13 button-close button-close--small" onClick={() => { this.handleCloseModal() }}></div>
+        <div
+            className={`modal ${modal ? 'modal--opened' : 'modal--closed'} `}>
+            <div className={`${modal ? 'modal-content--opened' : 'modal-content--closed'} ${className}`}>
+                <div className="modal-header row-1-1 col-1-13">
+                    <div className="col-1-11 modal-header-text">
+                        {title}
                     </div>
-                    <div className="modal-body">
-                        {this.props.children}
-                    </div>
+                    <div className="col-11-13 button-close button-close--small" onClick={() => { handleCloseModal() }}></div>
+                </div>
+                <div className="modal-body">
+                    {children}
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 
 
 

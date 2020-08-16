@@ -2,17 +2,15 @@ import React from 'react'
 
 
 
-class GymCard extends React.Component {
+function GymCard() {
 
-    render() {
-        return (
-            <React.Fragment>
-                <div className="card-container--ativo_aberto">
-                    <h1>Academia</h1>
-                </div>
-            </React.Fragment>
-        )
-    }
+    return (
+        <React.Fragment>
+            <div className="card-container--ativo_aberto">
+                <h1>Academia</h1>
+            </div>
+        </React.Fragment>
+    )
 
 
 }

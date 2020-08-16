@@ -1,45 +1,33 @@
 import React from 'react'
 
 
+function Form({ columnStart, columnEnd, rowStart, rowEnd, handleSubmit, children }) {
 
 
-class Form extends React.Component {
-
-    constructor(props) {
-        super(props)
-
-
-        this.handleSubmit = this.handleSubmit.bind(this)
-
-
-    }
-
-    handleSubmit(event) {
+    const handleOnSubmit = (event) => {
         event.preventDefault()
-        this.props.handleSubmit()
+        handleSubmit()
     }
 
 
-    render() {
 
 
-        return (
+    return (
 
 
-            <form
-                onSubmit={this.handleSubmit}
-                noValidate
-                style={{
-                    gridColumn: `${this.props.columnStart} / ${this.props.columnEnd}`,
-                    gridRow: `${this.props.rowStart} / ${this.props.rowEnd}`
-                }}
-                className={`form-grid ` }>
-                {this.props.children}
-            </form>
+        <form
+            onSubmit={handleOnSubmit}
+            noValidate
+            style={{
+                gridColumn: `${columnStart} / ${columnEnd}`,
+                gridRow: `${rowStart} / ${rowEnd}`
+            }}
+            className={`form-grid `}>
+            {children}
+        </form>
 
-        )
+    )
 
-    }
 
 
 }

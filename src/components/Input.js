@@ -1,86 +1,42 @@
 import React from 'react'
 
-let to = {}
 
-class Input extends React.Component {
-
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            errorMessage: '',
-            success: false
+function Input({ columnstart, columnend, rowstart, rowend, name, label, type, errorMessage, ...props }) {
+    
+    const [error, setError] = React.useState('')
+    const [success, ] = React.useState(false)
+    
+    React.useEffect(() => {
+        if(errorMessage){
+            setError(errorMessage)
+        } else{
+            setError('')
         }
 
-        this.handlerOnFocus = this.handlerOnFocus.bind(this)
-
-    }
+    }, [errorMessage])
 
 
-    handlerOnFocus() {
-        this.setState({
-            errorMessage: '',
-            success: false
-        })
+    return (
+        <>
+            <div style={{
+                gridColumn: `${columnstart} / ${columnend}`,
+                gridRow: `${rowstart} / ${rowend}`
+            }}>
+                <label htmlFor={`id-${name}`}>{label}</label>
+                <input
+                    {...props}
+                    name={name}
+                    className={`input-text ${success ? "input-text--success" : null}`}
+                    type={`${type}`} id={`id-${name}`}></input>
 
-    }
-
-
-    addErrorMessage(message) {
-
-        this.setState({
-            errorMessage: message
-        })
-
-
-        to = window.setTimeout(() => {
-
-            this.setState({ errorMessage: null })
-
-        }, 6000)
-
-    }
-
-
-    componentWillUnmount(){
-
-        clearTimeout(to);
-
-    }
-
-
-    addSuccess() {
-
-        this.setState({
-            success: true
-        })
-    }
-
-
-    render() {
-
-        return (
-            <>
-                <div style={{
-                    gridColumn: `${this.props.columnstart} / ${this.props.columnend}`,
-                    gridRow: `${this.props.rowstart} / ${this.props.rowend}`
-                }}>
-                    <label htmlFor={`id-${this.props.name}`}>{this.props.label}</label>
-                    <input {...this.props}
-                        onFocus={() => this.handlerOnFocus()}
-                        ref={this.props.id}
-                        className={`input-text ${this.state.success ? "input-text--success" : null}`}
-                        type={`${this.props.type}`} id={`id-${this.props.name}`}></input>
-
-                        <div  className={`input-invalid-message ${!this.state.errorMessage ? 'input-invalid-message--hide': 'input-invalid-message--show'}`} >
-                            {this.state.errorMessage}
-                        </div>
+                <div className={`input-invalid-message ${!error ? 'input-invalid-message--hide' : 'input-invalid-message--show'}`} >
+                    {error}
                 </div>
-            </>
-        )
+            </div>
+        </>
+    )
 
 
-    }
 
 }
 

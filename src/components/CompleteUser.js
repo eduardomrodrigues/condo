@@ -2,10 +2,10 @@ import React from 'react'
 
 import Form from "./Form";
 import Modal from './Modal'
+import { useSpring, animated } from 'react-spring'
 
 
 export default function CompleteUser({ user }) {
-
 
     const [usuario] = React.useState({
         modalComplemento: false,
@@ -15,6 +15,8 @@ export default function CompleteUser({ user }) {
 
     const modalLoginComplemento = React.useRef()
 
+    const props = useSpring({opacity: 1, from: {opacity: 0}})
+
 
     const onClickComplemento = () => {
         modalLoginComplemento.current.handleOpenModal()
@@ -22,7 +24,7 @@ export default function CompleteUser({ user }) {
 
     return (
         <div className="col-2-12">
-            <h2>Fale-me mais sobre o que acontece no seu apartamento, <span style={{ color: '#4581B5' }}> {usuario.nome}</span>...</h2>
+            <h2><animated.div style={props}>Fale-me mais sobre o que acontece no seu apartamento, </animated.div><span style={{ color: '#4581B5' }}> {usuario.nome}</span>...</h2>
 
             <Form
                 columnStart="4"
@@ -40,7 +42,7 @@ export default function CompleteUser({ user }) {
 
 
 
-                <div 
+                <div
                     onClick={onClickComplemento}
                     className="col-1-4 add-user">Adicione as pessoas que moram com você!</div>
 
