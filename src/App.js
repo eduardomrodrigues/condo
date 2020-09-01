@@ -61,6 +61,16 @@ function App() {
     return JSON.parse(usuarioLogado).nome
   }
 
+  React.useEffect(() => {
+
+    if(isLogged()){
+      recuperarNomeUsuario()
+      setLogin(true)
+    }
+
+  },[])
+
+
 
   return (
     <ModalProvider value={{ isLogged: () => isLogged(), 

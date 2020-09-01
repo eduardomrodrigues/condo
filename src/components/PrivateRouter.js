@@ -13,7 +13,9 @@ function PrivateRouter({ component: Component, ...rest }) {
 
 
     React.useEffect(() => {
+
         isCertifiedValid().then((result) => {
+            
             if (result.status === 200) {
                 context.onLoginSuccess()
                 setIsValid(true)

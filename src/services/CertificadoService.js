@@ -22,6 +22,11 @@ function isCertifiedValid() {
             let _email = JSON.parse(usuarioLogado).email
 
             getUser(_email, token).then((result) => {
+                
+                if(result.data.length === 0){
+                    reject()
+                }
+              
                 resolve(result)
 
             }).catch((error) => {

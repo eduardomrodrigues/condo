@@ -15,7 +15,7 @@ function Login() {
   const [emailError, setEmailError] = React.useState('')
   const [passwordError, setPasswordError] = React.useState('')
 
-  const [messageError, ] = React.useState('')
+  const [messageError, setMessageError] = React.useState('')
 
   const context = React.useContext(ModalContext)
 
@@ -51,7 +51,7 @@ function Login() {
         .catch((error) => {
 
           if (error.response.status === 404) {
-            this.setMessageError('Sua senha ou seu usuário estão errados')
+            setMessageError('Sua senha ou seu usuário estão errados')
           }
         });
 

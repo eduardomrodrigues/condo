@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function Form({ columnStart, columnEnd, rowStart, rowEnd, handleSubmit, children }) {
+function Form({ columnStart, columnEnd, rowStart, rowEnd, handleSubmit, big = false, children }) {
 
 
     const handleOnSubmit = (event) => {
@@ -22,7 +22,7 @@ function Form({ columnStart, columnEnd, rowStart, rowEnd, handleSubmit, children
                 gridColumn: `${columnStart} / ${columnEnd}`,
                 gridRow: `${rowStart} / ${rowEnd}`
             }}
-            className={`form-grid `}>
+            className={`form-grid${big?'-big':''} `}>
             {children}
         </form>
 

@@ -2,28 +2,26 @@ import React from 'react'
 
 function Card({ warning, titulo, imagem, children }) {
 
-    const [isOpened, setOpened] = React.useState(false)
+    const [isOpened, setIsOpened] = React.useState(false)
 
 
     const handleCloseCardOnClick = (event) => {
-
         event.preventDefault()
         event.stopPropagation()
-        setOpened({ isOpened: false })
-
+        setIsOpened(false)
     }
 
 
     const handleCardOnClick = (event) => {
-
         event.preventDefault()
         event.stopPropagation()
-        setOpened({ isOpened: true })
+        setIsOpened(true)
     }
 
 
 
     return (
+        
         <div className={`card card--ativo ${isOpened ? 'card--opened' : 'card--closed'}`} onClick={(event) => handleCardOnClick(event)}>
             {
                 (!isOpened) ?

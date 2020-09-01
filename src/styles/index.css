@@ -525,7 +525,8 @@ body {
 
     padding-top: 15px;
     padding-left: 15px;
-    font-family: 'Raleway-Bold';
+    font-family: 'Raleway';
+    font-size: 1.5em;
 
     background-color: #D2E7D7;
 
@@ -564,7 +565,7 @@ body {
     background-size: 2vh;
     background-position: right;
     margin-bottom: 10%;
-    margin-right: 5%;
+    margin-right: 10%;
 
 }
 
@@ -639,9 +640,14 @@ body {
 
     grid-row-start: 1;
     grid-row-end: 1;
-
-
 }
+
+.row-1-12 {
+
+    grid-row-start: 1;
+    grid-row-end: 12;
+}
+
 
 .row-1-4 {
 
@@ -664,6 +670,11 @@ body {
     grid-row-end: 7;
 }
 
+.row-2-8{
+    grid-row-start: 2;
+    grid-row-end: 8;
+
+}
 
 .col-2-13 {
 
@@ -724,6 +735,13 @@ body {
     grid-column-end: 9;
 }
 
+
+.col-5-13 {
+    grid-column-start: 5;
+    grid-column-end: 13;
+}
+
+
 .row-2-4 {
     grid-row-start: 2;
     grid-row-end: 4;
@@ -733,6 +751,12 @@ body {
 .row-2-5 {
     grid-row-start: 2;
     grid-row-end: 5;
+
+}
+
+.row-2-12 {
+    grid-row-start: 2;
+    grid-row-end: 12;
 
 }
 
@@ -895,6 +919,17 @@ body {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(8, 1fr);
+    z-index: 2;
+    background-color: white;
+
+
+}
+
+.form-grid-big {
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
     z-index: 2;
     background-color: white;
 
@@ -1175,5 +1210,20 @@ body {
 .add-user:active{
 
     box-shadow: inset 2px 4px 5px #B0B0B0;
+
+}
+
+
+.complete-form{
+    border: 1px solid #e3e3e3;
+    padding-left: 10px;
+    display: grid;
+}
+
+
+.complete-form h2{
+    border-bottom: 1px solid #cccccc;
+    font-family: 'Raleway';
+    font-size: 1.3em;
 
 }

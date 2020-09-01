@@ -29,12 +29,13 @@ function Body() {
 
 
     React.useEffect(() => {
+
         let token = recuperarToken()
         let usuarioLogado = b64DecodeUnicode(token.split('.')[1])
         let _email = JSON.parse(usuarioLogado).email
 
         getUser(_email, token).then((user) => {
-
+            
             setComplete(user.data[0].isComplete)
             setUser(user.data[0])
 
