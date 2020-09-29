@@ -1,7 +1,6 @@
 import React from 'react'
-
 import Tenant from "./Tenant"
-import { useSpring, animated } from 'react-spring'
+import Modal from './Modal'
 
 
 export default function CompleteUser({ user }) {
@@ -15,8 +14,9 @@ export default function CompleteUser({ user }) {
     })
 
 
-    const props = useSpring({ opacity: modalComplemento ? 1 : 0 })
-
+    const handleClickCloseModal = () => {
+        setModalCoplemento(false)
+    }
 
 
     return (
@@ -42,10 +42,12 @@ export default function CompleteUser({ user }) {
 
 
             <div className="row-3-3 col-1-4 add-user">Adicione dados do seus veículos</div>
-
-            <animated.div className="row-2-12 col-5-13 complete-form" style={props}>
-                <Tenant />
-            </animated.div>
+            <Tenant />
+            <Modal className="modal-medium" 
+                modalOpen={modalComplemento}
+                onClickCloseModal={handleClickCloseModal}>
+           
+            </Modal>
 
 
 

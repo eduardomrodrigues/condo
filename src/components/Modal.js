@@ -1,13 +1,18 @@
 import React from 'react'
 import ModalContext from './ModalContext'
 
-function Modal({modalOpen, className, title, children }) {
+function Modal({modalOpen, className, title, children, onClickCloseModal }) {
 
     const [modal, setModal] = React.useState(modalOpen)
 
     const context = React.useContext(ModalContext)
 
     const handleCloseModal = () => {
+        if(onClickCloseModal){
+            onClickCloseModal()
+            return
+        }
+
         context.fecharModalLogin()        
     }
 
@@ -21,7 +26,7 @@ function Modal({modalOpen, className, title, children }) {
 
         <div
             className={`modal ${modal ? 'modal--opened' : 'modal--closed'} `}>
-            <div className={`${modal ? 'modal-content--opened' : 'modal-content--closed'} ${className}`}>
+            <div className={`${modal ? 'modal-content--opened' : 'modal-content--closed'} ${className?className:''}`}>
                 <div className="modal-header row-1-1 col-1-13">
                     <div className="col-1-11 modal-header-text">
                         {title}

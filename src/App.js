@@ -2,7 +2,6 @@ import React from 'react'
 import Header from "./components/Header"
 import Body from "./components/Body";
 import PrivateRouter from './components/PrivateRouter'
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,6 +24,8 @@ function b64DecodeUnicode(str) {
 
 
 function App() {
+
+
 
   const [modalOpen, setModalOpen] = React.useState(false)
   const [login, setLogin] = React.useState(false)

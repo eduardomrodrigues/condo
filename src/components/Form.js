@@ -6,6 +6,7 @@ function Form({ columnStart, columnEnd, rowStart, rowEnd, handleSubmit, big = fa
 
     const handleOnSubmit = (event) => {
         event.preventDefault()
+
         handleSubmit()
     }
 
