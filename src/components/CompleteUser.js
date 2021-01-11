@@ -42,10 +42,10 @@ export default function CompleteUser({ user }) {
 
 
             <div className="row-3-3 col-1-4 add-user">Adicione dados do seus veículos</div>
-            <Tenant />
             <Modal className="modal-medium" 
                 modalOpen={modalComplemento}
                 onClickCloseModal={handleClickCloseModal}>
+                    <Tenant />
            
             </Modal>
 

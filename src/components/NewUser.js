@@ -263,7 +263,7 @@ function NewUser() {
                                 }} />
 
                             <Button
-                                label="login"
+                                label="Cadastrar"
                                 rowStart="8"
                                 rowEnd="8"
                                 columnStart="3"

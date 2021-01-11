@@ -1,32 +1,32 @@
 import React from 'react'
-import Form from './Form'
-import Input from './Input'
-import Button from './Button'
-
 
 
 export default function Tenant() {
 
     const [v, setV] = React.useState('')
 
-
-    const handleSubmit = (evt) => {
-        alert(evt)
-
+    const formId = "something";
+    const d = (e) => {
+        e.preventDefault()
+       console.log('aquin')
+        alert('a1ui')
     }
 
+    const handlerSubmit = (e) =>{
+        e.stopPropagation()
+        alert('aqui')
+    }
+
+    const a = 'titulo'
+  
 
     return (
-
-        <form name="anus" onSubmit={() => alert('a')}>
-            
-            <input type="text" value={v} onChange={e => {setV(e.target.value)}}></input>
-            <input type="submit" value="TESTE"></input>
-
-
-
+        <div>
+        <form onSubmit={(e) => handlerSubmit(e)}>
+           
+            <input type='submit' value="Enviar" className={a}/>
         </form>
-
+        </div>
     )
 
 }
